@@ -1,5 +1,5 @@
 {
-  "name": "TechJunkie",
+  "name": "TheCookieJar",
   "homepage": "https://github.com/thecookiejar",
   "authors": [
     "thecookiejar <nil>"
@@ -11,11 +11,12 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "src/app/vendor",
+    "src/web/wwwroot/vendor",
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "angular": "^1.5.8"
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7"
   }
 }

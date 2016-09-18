@@ -189,7 +189,11 @@ $RECYCLE.BIN/
 .vs/
 
 # Bower
-App/Vendor/Components/
+src/web/wwwroot/vendor/
+
+# NodeJS
+node_modules/
+
 
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)

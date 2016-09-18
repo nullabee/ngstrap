@@ -1,0 +1,26 @@
+{
+  "name": "thecookiejar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.1.0",
+    "stream-series": "^0.1.1",
+    "wiredep": "^4.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecookiejar/bones-aspnetcore1.0-NG.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecookiejar/bones-aspnetcore1.0-NG/issues"
+  },
+  "homepage": "https://github.com/thecookiejar/bones-aspnetcore1.0-NG#readme"
+}
