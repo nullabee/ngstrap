@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using app.Models;
+using api.Models;
 
-namespace app.Controllers
+namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class TodoController : Controller
@@ -20,7 +20,7 @@ namespace app.Controllers
             return TodoItems.GetAll();
         }
 
-        [HttpGet("{id}", Name = "ABC")]
+        [HttpGet("{id}", Name = "GetById")]
         public IActionResult GetById(string id)
         {
             var item = TodoItems.Find(id);
@@ -39,7 +39,7 @@ namespace app.Controllers
                 return BadRequest();
             }
             TodoItems.Add(item);
-            return CreatedAtRoute("ABC", new { id = item.Id }, item);
+            return CreatedAtRoute("GetById", new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]

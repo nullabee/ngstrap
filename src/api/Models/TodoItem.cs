@@ -1,4 +1,4 @@
-﻿namespace app.Models
+﻿namespace api.Models
 {
     public class TodoItem
     {
