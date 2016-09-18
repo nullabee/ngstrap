@@ -41,8 +41,7 @@ namespace app
                         controller = "Home",
                         action = "Index"
                     });
-            });
-            
+            });            
         }
     }
 }
