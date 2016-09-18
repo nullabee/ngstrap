@@ -1,0 +1,21 @@
+{
+  "name": "TechJunkie",
+  "homepage": "https://github.com/thecookiejar",
+  "authors": [
+    "thecookiejar <nil>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/app/vendor",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.5.8"
+  }
+}
