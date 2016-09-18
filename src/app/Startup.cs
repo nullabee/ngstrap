@@ -17,6 +17,7 @@ namespace app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<app.Data.PokemonStats>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@
 *@
 
 @model IEnumerable<app.Models.Pokemon>
+@inject app.Data.PokemonStats Stats
 
 <h3>Pokemons</h3>
 <ul>
@@ -11,3 +12,16 @@
         <li>@($"{m.Name} {m.Type}")</li>
     }
 </ul>
+
+<div>
+    <h4>Stats</h4>
+    <p>No. of Grass Pokemons: @await Stats.GetPokemonCountByType("grass")</p>
+    <p>No. of Fire Pokemons: @await Stats.GetPokemonCountByType("fire")</p>
+    <p>No. of Water Pokemons: @await Stats.GetPokemonCountByType("water")</p>
+    <p>No. of Bug Pokemons: @await Stats.GetPokemonCountByType("bug")</p>
+    <p>Total No. of Pokemons: @await Stats.GetPokemonCount()</p>
+</div>
+
+<div>
+    @await Component.InvokeAsync("PokemonList", new { type = "grass" })
+</div>
