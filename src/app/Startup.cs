@@ -42,11 +42,7 @@ namespace app
                         action = "Index"
                     });
             });
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            
         }
     }
 }
