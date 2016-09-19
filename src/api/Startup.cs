@@ -4,9 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Newtonsoft.Json.Serialization;
-using api.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using api.Models;
+using api.Resources;
+
 
 namespace api
 {
@@ -31,9 +33,9 @@ namespace api
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             // using Dependency Injection
-            services.AddSingleton<ITodoRepository, TodoRepository>();
-            services.AddSingleton<IContactsRepository, ContactsRepository>();
-            services.AddSingleton<IStudentRepository, StudentRepository>();
+            services.AddSingleton<IResource<Todo>, TodoResource>();
+            services.AddSingleton<IResource<Contact>, ContactResource>();
+            services.AddSingleton<IResource<Student>, StudentResource>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,68 +1,70 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
-using api.Repositories;
+using api.Resources;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        private IContactsRepository contactRepo { get; set; }
+        private IResource<Contact> resource { get; set; }
 
-        public ContactsController(IContactsRepository repo)
+        public ContactsController(IResource<Contact> resource)
         {
-            contactRepo = repo;
+            this.resource = resource;
         }
 
         [HttpGet]
-        public IEnumerable<Contacts> GetAll()
+        public IEnumerable<Contact> GetAll()
         {
-            return contactRepo.GetAll();
+            return resource.GetAll();
         }
 
-        [HttpGet("{id}", Name = "GetContacts")]
+        //[HttpGet("{id}", Name = "GetContacts")]
+        [HttpGet("{id}")]
         public IActionResult GetById(string id)
         {
-            var item = contactRepo.Find(id);
-            if (item == null)
+            var res = resource.Find(id);
+            if (res == null)
             {
                 return NotFound();
             }
-            return new ObjectResult(item);
+            return new ObjectResult(res);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Contacts item)
+        public IActionResult Create([FromBody] Contact item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
-            contactRepo.Add(item);
-            return CreatedAtRoute("GetContacts", new { Controller = "Contacts", id = item.MobilePhone }, item);
+            resource.Add(item);
+            //return CreatedAtRoute("GetContacts", new { Controller = "Contacts", id = item.MobilePhone }, item);
+            return CreatedAtRoute(new { id = item.MobilePhone }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, [FromBody] Contacts item)
+        public IActionResult Update(string id, [FromBody] Contact item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
-            var contactObj = contactRepo.Find(id);
-            if (contactObj == null)
+            var res = resource.Find(id);
+            if (res == null)
             {
                 return NotFound();
             }
-            contactRepo.Update(item);
+            resource.Update(item);
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            contactRepo.Remove(id);
+            resource.Remove(id);
         }
     }
 }

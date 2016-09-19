@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace api.Models
 {
-    public class Contacts
+    public class Contact
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

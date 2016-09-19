@@ -1,36 +1,36 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
-using api.Repositories;
+using api.Resources;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
     public class StudentsController : Controller
     {
-        private IStudentRepository studentRepo { get; set; }
+        private IResource<Student> resource { get; set; }
 
-        public StudentsController(IStudentRepository repo)
+        public StudentsController(IResource<Student> resource)
         {
-            studentRepo = repo;
+            this.resource = resource;
         }
 
         [HttpGet]
         public IEnumerable<Student> GetAll()
         {
-            return studentRepo.GetAll();
+            return resource.GetAll();
         }
 
 
-        [HttpGet("{id}", Name = "GetById2")]
+        [HttpGet("{id}")]
         public IActionResult GetById(string id)
         {
-            var item = studentRepo.Find(id);
-            if (item == null)
+            var res = resource.Find(id);
+            if (res == null)
             {
                 return NotFound();
             }
-            return new ObjectResult(item);
+            return new ObjectResult(res);
         }
 
         [HttpPost]
@@ -40,8 +40,9 @@ namespace api.Controllers
             {
                 return BadRequest();
             }
-            studentRepo.Add(item);
-            return CreatedAtRoute("GetById2", new { Controller = "Students", id = item.Email }, item);
+            resource.Add(item);
+            //return CreatedAtRoute("GetById2", new { Controller = "Students", id = item.Email }, item);
+            return CreatedAtRoute(new { id = item.Email }, item);
         }
 
     }

@@ -4,9 +4,9 @@ using System.Linq;
 using api.Models;
 
 
-namespace api.Repositories
+namespace api.Resources
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentResource : IResource<Student>
     {
         private static List<Student> students = new List<Student> {
             new Student { FirstName = "John", LastName = "Doe", Email = "john@example.com"},
@@ -22,7 +22,7 @@ namespace api.Repositories
         public Student Find(string key)
         {
             return students
-                .Where(e => e.Email.Equals(key))
+                .Where(r => r.Email.Equals(key))
                 .SingleOrDefault();
         }
 
@@ -33,19 +33,19 @@ namespace api.Repositories
         
         public void Remove(string key)
         {
-            var itemToRemove = students.SingleOrDefault(r => r.Email == key);
-            if (itemToRemove != null)
-                students.Remove(itemToRemove);
+            var res = students.SingleOrDefault(r => r.Email == key);
+            if (res != null)
+                students.Remove(res);
         }
 
         public void Update(Student item)
         {
-            var itemToUpdate = students.SingleOrDefault(r => r.Email == item.Email);
-            if (itemToUpdate != null)
+            var res = students.SingleOrDefault(r => r.Email == item.Email);
+            if (res != null)
             {
-                itemToUpdate.FirstName = item.FirstName;
-                itemToUpdate.LastName = item.LastName;
-                itemToUpdate.Email = item.Email;
+                res.FirstName = item.FirstName;
+                res.LastName = item.LastName;
+                res.Email = item.Email;
             }
         }
     }
