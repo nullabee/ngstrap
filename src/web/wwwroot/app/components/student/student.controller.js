@@ -5,7 +5,7 @@
         .module('app')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$http', '$http'];
+    StudentController.$inject = ['$scope', '$http'];
 
     function StudentController($scope, $http) {
         var vm = this;

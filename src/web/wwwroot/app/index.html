@@ -18,7 +18,7 @@
 </head>
 <body ng-app="app">
 
-    <!--div ui-view="login"></!--div-->
+    <div ui-view="login"></div>
     <div ui-view="main"></div>
 
     <!-- bower:js -->
@@ -26,12 +26,16 @@
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/vendor/ngstorage/ngStorage.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/app/index.module.js"></script>
+    <script src="/app/services/auth.service.js"></script>
+    <script src="/app/login/login.controller.js"></script>
     <script src="/app/main/main.controller.js"></script>
     <script src="/app/components/student/student.controller.js"></script>
     <script src="/app/index.route.js"></script>
+    <script src="/app/login/login.route.js"></script>
     <script src="/app/main/main.route.js"></script>
     <script src="/app/components/student/student.route.js"></script>
     <!-- endinject -->
