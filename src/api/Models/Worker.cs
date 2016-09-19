@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
     public class Worker
-    {   
+    {
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 
@@ -14,6 +15,5 @@ namespace api.Models
 
         [Required]
         public string Email { get; set; }
-
     }
 }

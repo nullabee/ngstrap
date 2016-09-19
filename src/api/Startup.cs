@@ -6,14 +6,28 @@ using Microsoft.AspNetCore.Cors.Infrastructure;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using api.Models;
 using api.Resources;
-
+using api.Data;
+using api.Dev;
 
 namespace api
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            Configuration = builder.Build();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
@@ -33,26 +47,37 @@ namespace api
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             // using Dependency Injection
-            services.AddSingleton<IResource<Todo>, TodoResource>();
-            services.AddSingleton<IResource<Contact>, ContactResource>();
-            services.AddSingleton<IResource<Student>, StudentResource>();
+            //services.AddSingleton<IResource<Todo>, TodoResource>();
+            //services.AddSingleton<IResource<Contact>, ContactResource>();
+            //services.AddSingleton<IResource<Student>, StudentResource>();
             services.AddSingleton<IResource<Worker>, WorkerResource>();
+
+            services.AddDbContext<SchoolContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<WorkerContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+            ILoggerFactory loggerFactory, SchoolContext sContext, WorkerContext wContext)
         {
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            } 
 
             app.UseCors("AllowAllOrigins");
             
             // Perform the routing
             app.UseMvc();
+
+            // Mock InitializeMockIfEmpty the DB
+            //CourseDBInitialiser.InitializeMockIfEmpty(sContext);
+            WorkerDBInitialiser.InitializeMockIfEmpty(wContext);
         }
 
         private static void buildCorsOptions(CorsOptions options)
