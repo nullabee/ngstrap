@@ -5,7 +5,8 @@ namespace api.Data
 {
     public class WorkerContext : DbContext
     {
-        public WorkerContext(DbContextOptions<WorkerContext> options) : base(options)
+        public WorkerContext(DbContextOptions<WorkerContext> options) : 
+            base(options)
         {
         }
 

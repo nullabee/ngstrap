@@ -2,45 +2,47 @@
 using System.Collections.Generic;
 using System.Linq;
 using api.Models;
-
+using api.Data;
 
 namespace api.Resources
 {
     public class WorkerResource : IResource<Worker>
     {
-        private static List<Worker> workers = new List<Worker> {
-            new Worker { FirstName = "John", LastName = "Doe", Email = "john@example.com"},
-            new Worker { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com"},
-            new Worker { FirstName = "July", LastName = "Dooley", Email = "july@example.com"}
-        };
+        private readonly WorkerContext context;
         
+        public WorkerResource(WorkerContext context)
+        {
+            this.context = context;
+        }
+
         public IEnumerable<Worker> GetAll()
         {
-            return workers;
+            return context.Workers;
         }
 
         public Worker Find(string key)
         {
-            return workers
+            return context.Workers
                 .Where(r => r.Email.Equals(key))
                 .SingleOrDefault();
         }
 
         public void Add(Worker item)
         {
-            workers.Add(item);
+            context.Workers.Add(item);
+            context.SaveChanges();
         }
-        
+
         public void Remove(string key)
         {
-            var res = workers.SingleOrDefault(r => r.Email == key);
+            var res = context.Workers.SingleOrDefault(r => r.Email == key);
             if (res != null)
-                workers.Remove(res);
+                context.Workers.Remove(res);
         }
 
         public void Update(Worker item)
         {
-            var res = workers.SingleOrDefault(r => r.Email == item.Email);
+            var res = context.Workers.SingleOrDefault(r => r.Email == item.Email);
             if (res != null)
             {
                 res.FirstName = item.FirstName;
