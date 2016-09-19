@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
-    public class Student
-    {
-        [Required]
-        public int Id { get; set; }
-        
+    public class Worker
+    {   
         [Required]
         public string FirstName { get; set; }
 
@@ -18,8 +15,5 @@ namespace api.Models
         [Required]
         public string Email { get; set; }
 
-        public DateTime EnrollmentDate { get; set; }
-
-        public ICollection<Enrollment> Enrollments { get; set; }
     }
 }

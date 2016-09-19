@@ -36,6 +36,7 @@ namespace api
             services.AddSingleton<IResource<Todo>, TodoResource>();
             services.AddSingleton<IResource<Contact>, ContactResource>();
             services.AddSingleton<IResource<Student>, StudentResource>();
+            services.AddSingleton<IResource<Worker>, WorkerResource>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

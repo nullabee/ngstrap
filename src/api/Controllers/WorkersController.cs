@@ -6,17 +6,17 @@ using api.Resources;
 namespace api.Controllers
 {
     [Route("api/[controller]")]
-    public class StudentsController : Controller
+    public class WorkersController : Controller
     {
-        private IResource<Student> resource { get; set; }
+        private IResource<Worker> resource { get; set; }
 
-        public StudentsController(IResource<Student> resource)
+        public WorkersController(IResource<Worker> resource)
         {
             this.resource = resource;
         }
 
         [HttpGet]
-        public IEnumerable<Student> GetAll()
+        public IEnumerable<Worker> GetAll()
         {
             return resource.GetAll();
         }
@@ -34,7 +34,7 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Student item)
+        public IActionResult Create([FromBody] Worker item)
         {
             if (item == null)
             {
