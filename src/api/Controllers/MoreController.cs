@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {

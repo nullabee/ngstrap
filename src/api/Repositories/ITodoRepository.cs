@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using api.Models;
 
-namespace api.Models
+namespace api.Repositories
 {
     public interface ITodoRepository
     {

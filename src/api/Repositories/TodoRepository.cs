@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using api.Models;
 
-namespace api.Models
+namespace api.Repositories
 {
     public class TodoRepository : ITodoRepository
     {

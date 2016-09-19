@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using api.Models;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Newtonsoft.Json.Serialization;
+using api.Repositories;
 
 namespace api
 {
@@ -24,9 +23,14 @@ namespace api
                 //});
             }
 
-            services.AddMvc();
+            services.AddMvc()
+                // return JSON response in form of Camel Case so that we can sure consume the API in any client. 
+                // Enable CamelCasePropertyNamesContractResolver in Configure Services.
+                .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
+            // using Dependency Injection
             services.AddSingleton<ITodoRepository, TodoRepository>();
+            services.AddSingleton<IContactsRepository, ContactsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

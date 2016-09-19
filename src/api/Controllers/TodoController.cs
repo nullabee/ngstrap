@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using api.Models;
+using api.Repositories;
 
 namespace api.Controllers
 {
