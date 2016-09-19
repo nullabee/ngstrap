@@ -33,10 +33,9 @@ gulp.task('injector', function () {
             goes: 'here',
             ignorePath: '..',
             overrides: {
-                bootstrap: {
-                    //main: ["dist/js/bootstrap.js", "dist/css/bootstrap.css"]
-                    main: ["dist/css/bootstrap.css"]
-                },
+                angular: { main: ["angular.min.js"] },
+                bootstrap: { main: ["dist/css/bootstrap.min.css"] },
+                jquery: { main: ["dist/jquery.min.js"] },
             }
         }))
         .pipe(inject(series(scriptSrc, moduleSrc, serviceSrc, controllerSrc, routeSrc), { ignorePath: '/wwwroot' }))

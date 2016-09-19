@@ -18,6 +18,7 @@ namespace web
         {
             services.AddMvc();
 
+            // Move the default ~/View/ to ~/wwwroot/views/
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationFormats.Clear();

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,13 +6,15 @@
     <title>AspNetCoreSPA</title>
 
     <!-- bower:css -->
-    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/css/styles.css">
     <!-- endinject -->
 </head>
 <body>
+
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -61,9 +63,41 @@
         </footer>
     </div>
 
+
+    <div>
+        <select id="method">
+            <option value="get">GET</option>
+            <option value="post">POST</option>
+            <option value="put">PUT</option>
+        </select>
+        <input type="button" value="Try it" onclick="sendRequest()" />
+        <span id='value1'>(Result)</span>
+    </div>
+
+    <script>
+        // TODO: Replace with the URL of your WebService app
+        var serviceUrl = 'http://localhost:18081/api/test';
+
+        function sendRequest() {
+            var method = $('#method').val();
+
+            $.ajax({
+                type: method,
+                url: serviceUrl,
+                error: function(xhr) {
+                    alert("An error occured: " + xhr.status + " " + xhr.statusText);
+                },
+                success: function(result) {
+                    $('#value1').text(result);
+                }
+            });
+        }
+    </script>
+
+
     <!-- bower:js -->
-    <script src="/vendor/angular/angular.js"></script>
-    <script src="/vendor/jquery/dist/jquery.js"></script>
+    <script src="/vendor/angular/angular.min.js"></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/ng/app.module.js"></script>
