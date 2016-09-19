@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using api.Models;
 using api.Resources;
 using api.Data;
-using api.Dev;
 
 namespace api
 {
@@ -52,16 +51,14 @@ namespace api
             //services.AddSingleton<IResource<Student>, StudentResource>();
             services.AddSingleton<IResource<Worker>, WorkerResource>();
 
-            services.AddDbContext<SchoolContext>(options =>
+            services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<WorkerContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
-            ILoggerFactory loggerFactory, SchoolContext sContext, WorkerContext wContext)
+            ILoggerFactory loggerFactory, DataContext context)
         {
             loggerFactory.AddConsole();
 
@@ -76,8 +73,7 @@ namespace api
             app.UseMvc();
 
             // Mock InitializeMockIfEmpty the DB
-            //CourseDBInitialiser.InitializeMockIfEmpty(sContext);
-            WorkerDBInitialiser.InitializeMockIfEmpty(wContext);
+            MockDataInitialiser.InitializeMockIfEmpty(context);
         }
 
         private static void buildCorsOptions(CorsOptions options)

@@ -8,9 +8,9 @@ namespace api.Resources
 {
     public class WorkerResource : IResource<Worker>
     {
-        private readonly WorkerContext context;
+        private readonly DataContext context;
         
-        public WorkerResource(WorkerContext context)
+        public WorkerResource(DataContext context)
         {
             this.context = context;
         }

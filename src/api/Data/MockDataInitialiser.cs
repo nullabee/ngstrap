@@ -1,21 +1,53 @@
 ﻿using System;
 using System.Linq;
 using api.Models;
-using api.Data;
 
-
-namespace api.Dev
+namespace api.Data
 {
-    public static class CourseDBInitialiser
+    public static class MockDataInitialiser
     {
-        public static void InitializeMockIfEmpty(SchoolContext context)
+        public static void InitializeMockIfEmpty(DataContext context)
         {
             context.Database.EnsureCreated();
 
+            if (!InitWorkers(context)) return;
+            if (!InitStudents(context)) return;
+
+            InitCourses(context);
+            InitEnrollment(context);
+        }
+
+        private static bool InitWorkers(DataContext context)
+        {
+            // Look for any students.
+            if (context.Workers.Any())
+            {
+                return false;   // DB has been seeded
+            }
+
+            var workers = new Worker[]
+            {
+                new Worker { FirstName = "John", LastName = "Doe", Email = "john@example.com"},
+                new Worker { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com"},
+                new Worker { FirstName = "July", LastName = "Dooley", Email = "july@example.com"}
+            };
+
+            foreach (Worker w in workers)
+            {
+                context.Workers.Add(w);
+            }
+            context.SaveChanges();
+
+            return true;
+        }
+
+
+        private static bool InitStudents(DataContext context)
+        {
             // Look for any students.
             if (context.Students.Any())
             {
-                return;   // DB has been seeded
+                return false;   // DB has been seeded
             }
 
             var students = new Student[]
@@ -36,6 +68,11 @@ namespace api.Dev
             }
             context.SaveChanges();
 
+            return true;
+        }
+
+        private static void InitCourses(DataContext context)
+        {
             var courses = new Course[]
             {
                 new Course{CourseID=1050,Title="Chemistry",Credits=3,},
@@ -51,6 +88,10 @@ namespace api.Dev
                 context.Courses.Add(c);
             }
             context.SaveChanges();
+        }
+
+        private static void InitEnrollment(DataContext context)
+        {
 
             var enrollments = new Enrollment[]
             {
