@@ -2,51 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using api.Models;
-
+using api.Data;
 
 namespace api.Resources
 {
     public class StudentResource : IResource<Student>
     {
-        private static List<Student> students = new List<Student> {
-            new Student { FirstName = "John", LastName = "Doe", Email = "john@example.com"},
-            new Student { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com"},
-            new Student { FirstName = "July", LastName = "Dooley", Email = "july@example.com"}
-        };
-        
+        private readonly DataContext context;
+
+        public StudentResource(DataContext context)
+        {
+            this.context = context;
+        }
+
         public IEnumerable<Student> GetAll()
         {
-            return students;
+            return context.Students;
         }
 
         public Student Find(string key)
         {
-            return students
-                .Where(r => r.Email.Equals(key))
+            int id = Int32.Parse(key);
+            return context.Students
+                .Where(r => r.Id == id)
                 .SingleOrDefault();
         }
 
         public void Add(Student item)
         {
-            students.Add(item);
+            context.Students.Add(item);
+            context.SaveChanges();
         }
         
-        public void Remove(string key)
+        public bool Remove(string key)
         {
-            var res = students.SingleOrDefault(r => r.Email == key);
+            var res = Find(key);
             if (res != null)
-                students.Remove(res);
+            {
+                context.Students.Remove(res);
+                context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-        public void Update(Student item)
+        public bool Update(Student item)
         {
-            var res = students.SingleOrDefault(r => r.Email == item.Email);
+            var res = Find(item.Id.ToString());
             if (res != null)
             {
                 res.FirstName = item.FirstName;
                 res.LastName = item.LastName;
                 res.Email = item.Email;
+                context.SaveChanges();
+                return true;
             }
+
+            return false;
+            
         }
     }
 }

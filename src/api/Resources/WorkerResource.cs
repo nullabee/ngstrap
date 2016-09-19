@@ -33,22 +33,31 @@ namespace api.Resources
             context.SaveChanges();
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
-            var res = context.Workers.SingleOrDefault(r => r.Email == key);
+            var res = Find(key);
             if (res != null)
+            {
                 context.Workers.Remove(res);
+                context.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
-        public void Update(Worker item)
+        public bool Update(Worker item)
         {
-            var res = context.Workers.SingleOrDefault(r => r.Email == item.Email);
+            var res = Find(item.Email);
             if (res != null)
             {
                 res.FirstName = item.FirstName;
                 res.LastName = item.LastName;
                 res.Email = item.Email;
+                context.SaveChanges();
+                return true;
             }
+
+            return false;           
         }
     }
 }

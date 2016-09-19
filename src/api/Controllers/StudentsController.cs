@@ -20,12 +20,11 @@ namespace api.Controllers
         {
             return resource.GetAll();
         }
-
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        
+        [HttpGet("{key}")]
+        public IActionResult GetById(string key)
         {
-            var res = resource.Find(id);
+            var res = resource.Find(key);
             if (res == null)
             {
                 return NotFound();
@@ -41,8 +40,33 @@ namespace api.Controllers
                 return BadRequest();
             }
             resource.Add(item);
-            return CreatedAtRoute(new { id = item.Email }, item);
+            return CreatedAtRoute(new { id = item.Id }, item);
         }
 
+        [HttpPut("{key}")]
+        public IActionResult Update(string key, [FromBody] Student item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+            
+            if (resource.Update(item))
+            {
+                return new NoContentResult();
+            }
+
+            return NotFound();            
+        }
+
+        [HttpDelete("{key}")]
+        public IActionResult Delete(string key)
+        {
+            if (resource.Remove(key))
+            {
+                return new NoContentResult();
+            }
+            return NotFound();
+        }
     }
 }

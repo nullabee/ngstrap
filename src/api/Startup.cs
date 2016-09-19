@@ -48,7 +48,7 @@ namespace api
             // using Dependency Injection
             //services.AddSingleton<IResource<Todo>, TodoResource>();
             //services.AddSingleton<IResource<Contact>, ContactResource>();
-            //services.AddSingleton<IResource<Student>, StudentResource>();
+            services.AddTransient<IResource<Student>, StudentResource>();
             services.AddTransient<IResource<Worker>, WorkerResource>();
 
             services.AddDbContext<DataContext>(options =>

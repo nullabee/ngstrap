@@ -25,16 +25,20 @@ namespace api.Resources
             contacts.Add(item);
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
-            var res = contacts.SingleOrDefault(r => r.MobilePhone == key);
+            var res = Find(key);
             if (res != null)
+            {
                 contacts.Remove(res);
+                return true;
+            }
+            return false;
         }
 
-        public void Update(Contact item)
+        public bool Update(Contact item)
         {
-            var res = contacts.SingleOrDefault(r => r.MobilePhone == item.MobilePhone);
+            var res = Find(item.MobilePhone);
             if (res != null)
             {
                 res.FirstName = item.FirstName;
@@ -46,7 +50,9 @@ namespace api.Resources
                 res.MobilePhone = item.MobilePhone;
                 res.DateOfBirth = item.DateOfBirth;
                 res.AnniversaryDate = item.AnniversaryDate;
+                return true;
             }
+            return false;
         }
     }
 }

@@ -2,25 +2,29 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>NIL</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="student in vm.students.data">
-            <td>ID</td>
             <td>{{student.firstName}}</td>
             <td>{{student.lastName}}</td>
             <td>{{student.email}}</td>
+            <td><a href='' ng-click='vm.students.edit(student)' data-toggle="modal" data-target="#studentForm">Edit</a></td>
+            <td><a href='' ng-click='vm.students.deleto(student.id)'>Delete</a></td>
         </tr>
     </tbody>
 </table>
 
-<input type="button" class="btn btn-default" value="Create" data-toggle="modal" data-target="#formCreate" />
+<input type="button" class="btn btn-default" value="Create" ng-click='vm.students.clear()' data-toggle="modal" data-target="#studentForm" />
 
-<form id="formCreate" class="modal fade" role="dialog">
+<form id="studentForm" class="modal fade" role="dialog">
+    <input type="hidden" id="id" ng-model="vm.students.inputs.id">
+
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -43,7 +47,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success" ng-click="vm.students.create()">Submit</button>
+                <button type="submit" ng-hide='vm.students.inputs.id' class="btn btn-success" ng-click="vm.students.create()">Submit</button>
+                <button type="submit" ng-show='vm.students.inputs.id' class="btn btn-success" ng-click="vm.students.update()">Update</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>

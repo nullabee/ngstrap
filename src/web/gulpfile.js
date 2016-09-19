@@ -35,6 +35,7 @@ gulp.task('injector', function () {
             overrides: {
                 angular: { main: ["angular.min.js"] },
                 bootstrap: { main: ["dist/css/bootstrap.min.css", "dist/js/bootstrap.min.js"] },
+                //"ng-table": { main: ["dist/ng-table.min.css", "dist/ng-table.min.js"] },
                 jquery: { main: ["dist/jquery.min.js"] },
             }
         }))

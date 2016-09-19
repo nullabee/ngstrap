@@ -10,7 +10,7 @@ namespace api.Resources
         IEnumerable<T> GetAll();
         T Find(string key);
         void Add(T item);
-        void Remove(string key);
-        void Update(T item);
+        bool Remove(string key);
+        bool Update(T item);
     }
 }

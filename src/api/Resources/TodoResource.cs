@@ -34,15 +34,16 @@ namespace api.Resources
             todos[item.Key] = item;
         }
 
-        public void Remove(string key)
+        public bool Remove(string key)
         {
             Todo item;
-            todos.TryRemove(key, out item);
+            return todos.TryRemove(key, out item);
         }
 
-        public void Update(Todo item)
+        public bool Update(Todo item)
         {
             todos[item.Key] = item;
+            return true;
         }
     }
 }

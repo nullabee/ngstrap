@@ -3,7 +3,7 @@
     angular
         .module('app', [
             'ui.router',
-            'ngStorage',
+            'ngStorage'
         ]);
 
     angular.module('app').run(runapp);
