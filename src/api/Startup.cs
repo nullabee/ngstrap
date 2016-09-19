@@ -49,7 +49,7 @@ namespace api
             //services.AddSingleton<IResource<Todo>, TodoResource>();
             //services.AddSingleton<IResource<Contact>, ContactResource>();
             //services.AddSingleton<IResource<Student>, StudentResource>();
-            services.AddSingleton<IResource<Worker>, WorkerResource>();
+            services.AddTransient<IResource<Worker>, WorkerResource>();
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
