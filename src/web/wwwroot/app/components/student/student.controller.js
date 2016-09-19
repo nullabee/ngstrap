@@ -14,10 +14,7 @@
 
         vm.createStudentInput = {};
         vm.createStudent = function () {
-            console.log("hello");
-            console.log(JSON.stringify(vm.createStudentInput));
-
-            $http.post("http://localhost:18081/api/students", JSON.stringify(vm.createStudentInput))
+            $http.post(site.api('students'), JSON.stringify(vm.createStudentInput))
                 .then(function (response) {
 
                     // Re-load data
@@ -28,7 +25,7 @@
                 });
         }
 
-        $http.get("http://localhost:18081/api/students")
+        $http.get(site.api('students'))
             .then(function (response) {
                 vm.students = response.data;
             });
