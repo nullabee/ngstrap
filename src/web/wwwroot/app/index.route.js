@@ -1,21 +1,21 @@
-﻿(function () {
+﻿(() => {
     'use strict';
 
-    angular
-      .module('app')
-      .config(routerConfig);
+    angular.module('app').config(routes);
+    routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    routerConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+    angular.module('app').run(startup);
+    startup.$inject = ['$rootScope', '$templateCache'];
 
-    function routerConfig($stateProvider, $urlRouterProvider) {
+    function routes($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('main', {
                 url: '/',
                 templateUrl: 'app/main/main.html',
-                controller: 'MainController',
-                controllerAs: 'vm'
+                //controller: 'Main1Controller',
+                //controllerAs: 'vm'
             })
             .state('student', {
                 url: '/student',
@@ -24,4 +24,12 @@
                 controllerAs: 'vm'
             });
     }
+    
+    // This automatically clear the cache whenever the ng-view content changes.
+    function startup($rootScope, $templateCache) {
+        $rootScope.$on('$viewContentLoaded', function () {
+            $templateCache.removeAll();
+        });
+    }
+
 })();

@@ -5,6 +5,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Newtonsoft.Json.Serialization;
 using api.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace api
 {
@@ -17,10 +19,10 @@ namespace api
             {
                 // Enable CORS
                 services.AddCors(options => buildCorsOptions(options));
-                //services.Configure<MvcOptions>(options =>
-                //{
-                //    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
-                //});
+                services.Configure<MvcOptions>(options =>
+                {
+                    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
+                });
             }
 
             services.AddMvc()
@@ -55,16 +57,18 @@ namespace api
             options.AddPolicy("AllowAllOrigins",
                 builder =>
                 {
-                    builder.AllowAnyOrigin();
-                });
-
-            options.AddPolicy("AllowSpecificOrigin",
-                builder =>
-                {
-                    builder.WithOrigins("http://worldhost:8080")
-                           .WithMethods("GET", "POST")
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
                            .AllowAnyHeader();
                 });
+
+            //options.AddPolicy("AllowSpecificOrigin",
+            //    builder =>
+            //    {
+            //        builder.WithOrigins("http://localhost:18080")
+            //               .WithMethods("GET", "POST")
+            //               .AllowAnyHeader();
+            //    });
         }
     }
 

@@ -20,5 +20,29 @@ namespace api.Controllers
         {
             return studentRepo.GetAll();
         }
+
+
+        [HttpGet("{id}", Name = "GetById2")]
+        public IActionResult GetById(string id)
+        {
+            var item = studentRepo.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(item);
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] Student item)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+            studentRepo.Add(item);
+            return CreatedAtRoute("GetById2", new { Controller = "Students", id = item.Email }, item);
+        }
+
     }
 }

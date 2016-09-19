@@ -34,7 +34,7 @@ gulp.task('injector', function () {
             ignorePath: '..',
             overrides: {
                 angular: { main: ["angular.min.js"] },
-                bootstrap: { main: ["dist/css/bootstrap.min.css"] },
+                bootstrap: { main: ["dist/css/bootstrap.min.css", "dist/js/bootstrap.min.js"] },
                 jquery: { main: ["dist/jquery.min.js"] },
             }
         }))
