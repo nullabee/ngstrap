@@ -22,9 +22,9 @@ namespace web
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationFormats.Clear();
-                options.ViewLocationFormats.Add("~/wwwroot/views/components/{1}/{0}.html");
-                options.ViewLocationFormats.Add("~/wwwroot/views/{1}/{0}.html");
-                options.ViewLocationFormats.Add("~/wwwroot/views/{0}.html");
+                options.ViewLocationFormats.Add("~/wwwroot/app/components/{1}/{0}.html");
+                options.ViewLocationFormats.Add("~/wwwroot/app/{1}/{0}.html");
+                options.ViewLocationFormats.Add("~/wwwroot/app/{0}.html");
             });
         }
 

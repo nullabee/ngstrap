@@ -9,12 +9,12 @@ var gulp = require("gulp"),
 var webroot = "./wwwroot/";
 
 var paths = {
-    ngModule: webroot + "ng/**/*.module.js",
-    ngRoute: webroot + "ng/**/*.route.js",
-    ngService: webroot + "ng/**/*.service.js",
-    ngController: webroot + "ng/**/*.controller.js",
-    script: webroot + "js/**/*.js",
-    style: webroot + "css/**/*.css"
+    ngModule:       webroot + "app/**/*.module.js",
+    ngRoute:        webroot + "app/**/*.route.js",
+    ngService:      webroot + "app/**/*.service.js",
+    ngController:   webroot + "app/**/*.controller.js",
+    script:         webroot + "js/**/*.js",
+    style:          webroot + "css/**/*.css"
 };
 
 gulp.task('injector', function () {
@@ -25,7 +25,7 @@ gulp.task('injector', function () {
     var scriptSrc = gulp.src(paths.script, { read: false });
     var styleSrc = gulp.src(paths.style, { read: false });
 
-    gulp.src(webroot + 'views/*.html')
+    gulp.src(webroot + 'app/index.html')
         .pipe(wiredep({
             bowerJson: require('./../../bower.json'),
             directory: webroot + 'vendor/',
@@ -40,5 +40,5 @@ gulp.task('injector', function () {
         }))
         .pipe(inject(series(scriptSrc, moduleSrc, serviceSrc, controllerSrc, routeSrc), { ignorePath: '/wwwroot' }))
         .pipe(inject(series(styleSrc), { ignorePath: '/wwwroot' }))
-        .pipe(gulp.dest(webroot + 'views'));
+        .pipe(gulp.dest(webroot + 'app'));
 });

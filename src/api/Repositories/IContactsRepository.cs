@@ -5,10 +5,10 @@ namespace api.Repositories
 {
     public interface IContactsRepository
     {
-        void Add(Contacts item);
         IEnumerable<Contacts> GetAll();
         Contacts Find(string key);
-        void Remove(string Id);
+        void Add(Contacts item);
+        void Remove(string key);
         void Update(Contacts item);
     }
 }

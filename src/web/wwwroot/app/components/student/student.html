@@ -1,0 +1,19 @@
+﻿<h2>Student List</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>NIL</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="student in vm.students">
+            <td>ID</td>
+            <td>{{student.firstName}}</td>
+            <td>{{student.lastName}}</td>
+            <td>{{student.email}}</td>
+        </tr>
+    </tbody>
+</table>

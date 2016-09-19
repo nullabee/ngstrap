@@ -8,23 +8,23 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        public IContactsRepository ContactsRepo { get; set; }
+        private IContactsRepository contactRepo { get; set; }
 
-        public ContactsController(IContactsRepository _repo)
+        public ContactsController(IContactsRepository repo)
         {
-            ContactsRepo = _repo;
+            contactRepo = repo;
         }
 
         [HttpGet]
         public IEnumerable<Contacts> GetAll()
         {
-            return ContactsRepo.GetAll();
+            return contactRepo.GetAll();
         }
 
         [HttpGet("{id}", Name = "GetContacts")]
         public IActionResult GetById(string id)
         {
-            var item = ContactsRepo.Find(id);
+            var item = contactRepo.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace api.Controllers
             {
                 return BadRequest();
             }
-            ContactsRepo.Add(item);
+            contactRepo.Add(item);
             return CreatedAtRoute("GetContacts", new { Controller = "Contacts", id = item.MobilePhone }, item);
         }
 
@@ -50,19 +50,19 @@ namespace api.Controllers
             {
                 return BadRequest();
             }
-            var contactObj = ContactsRepo.Find(id);
+            var contactObj = contactRepo.Find(id);
             if (contactObj == null)
             {
                 return NotFound();
             }
-            ContactsRepo.Update(item);
+            contactRepo.Update(item);
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
         public void Delete(string id)
         {
-            ContactsRepo.Remove(id);
+            contactRepo.Remove(id);
         }
     }
 }

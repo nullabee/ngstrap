@@ -8,23 +8,23 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class TodoController : Controller
     {
-        public ITodoRepository TodoItems { get; set; }
+        private ITodoRepository todoRepo { get; set; }
 
-        public TodoController(ITodoRepository todoItems)
+        public TodoController(ITodoRepository repo)
         {
-            TodoItems = todoItems;
+            todoRepo = repo;
         }
 
         [HttpGet]
         public IEnumerable<TodoItem> GetAll() 
         {
-            return TodoItems.GetAll();
+            return todoRepo.GetAll();
         }
 
         [HttpGet("{id}", Name = "GetById")]
         public IActionResult GetById(string id)
         {
-            var item = TodoItems.Find(id);
+            var item = todoRepo.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -39,7 +39,7 @@ namespace api.Controllers
             {
                 return BadRequest();
             }
-            TodoItems.Add(item);
+            todoRepo.Add(item);
             return CreatedAtRoute("GetById", new { id = item.Id }, item);
         }
 
@@ -51,13 +51,13 @@ namespace api.Controllers
                 return BadRequest();
             }
 
-            var todo = TodoItems.Find(id);
+            var todo = todoRepo.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
-            TodoItems.Update(item);
+            todoRepo.Update(item);
             return new NoContentResult();
         }
 
@@ -69,7 +69,7 @@ namespace api.Controllers
                 return BadRequest();
             }
 
-            var todo = TodoItems.Find(id);
+            var todo = todoRepo.Find(id);
             if (todo == null)
             {
                 return NotFound();
@@ -77,20 +77,20 @@ namespace api.Controllers
 
             item.Id = todo.Id;
 
-            TodoItems.Update(item);
+            todoRepo.Update(item);
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            var todo = TodoItems.Find(id);
+            var todo = todoRepo.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
-            TodoItems.Remove(id);
+            todoRepo.Remove(id);
             return new NoContentResult();
         }
     }

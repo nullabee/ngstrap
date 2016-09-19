@@ -5,10 +5,10 @@ namespace api.Repositories
 {
     public interface ITodoRepository
     {
-        void Add(TodoItem item);
         IEnumerable<TodoItem> GetAll();
         TodoItem Find(string key);
-        TodoItem Remove(string key);
+        void Add(TodoItem item);
+        void Remove(string key);
         void Update(TodoItem item);
     }
 }

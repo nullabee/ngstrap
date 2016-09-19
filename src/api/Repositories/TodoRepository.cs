@@ -21,12 +21,6 @@ namespace api.Repositories
             return _todos.Values;
         }
 
-        public void Add(TodoItem item)
-        {
-            item.Id = Guid.NewGuid().ToString();
-            _todos[item.Id] = item;
-        }
-
         public TodoItem Find(string key)
         {
             TodoItem item;
@@ -34,11 +28,16 @@ namespace api.Repositories
             return item;
         }
 
-        public TodoItem Remove(string key)
+        public void Add(TodoItem item)
+        {
+            item.Id = Guid.NewGuid().ToString();
+            _todos[item.Id] = item;
+        }
+
+        public void Remove(string key)
         {
             TodoItem item;
             _todos.TryRemove(key, out item);
-            return item;
         }
 
         public void Update(TodoItem item)

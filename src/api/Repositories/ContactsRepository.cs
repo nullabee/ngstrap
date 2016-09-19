@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using api.Models;
 
@@ -7,11 +6,11 @@ namespace api.Repositories
 {
     public class ContactsRepository : IContactsRepository
     {
-        static List<Contacts> ContactsList = new List<Contacts>();
+        private static List<Contacts> ContactsList = new List<Contacts>();
 
-        public void Add(Contacts item)
+        public IEnumerable<Contacts> GetAll()
         {
-            ContactsList.Add(item);
+            return ContactsList;
         }
 
         public Contacts Find(string key)
@@ -21,14 +20,14 @@ namespace api.Repositories
                 .SingleOrDefault();
         }
 
-        public IEnumerable<Contacts> GetAll()
+        public void Add(Contacts item)
         {
-            return ContactsList;
+            ContactsList.Add(item);
         }
 
-        public void Remove(string Id)
+        public void Remove(string key)
         {
-            var itemToRemove = ContactsList.SingleOrDefault(r => r.MobilePhone == Id);
+            var itemToRemove = ContactsList.SingleOrDefault(r => r.MobilePhone == key);
             if (itemToRemove != null)
                 ContactsList.Remove(itemToRemove);
         }
