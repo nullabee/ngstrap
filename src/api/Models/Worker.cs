@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace api.Models
 {
@@ -15,5 +16,7 @@ namespace api.Models
 
         [Required]
         public string Email { get; set; }
+
+        public DateTime StartDate { get; set; }
     }
 }

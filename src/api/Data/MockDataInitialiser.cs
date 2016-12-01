@@ -27,9 +27,9 @@ namespace api.Data
 
             var workers = new Worker[]
             {
-                new Worker { FirstName = "John", LastName = "Doe", Email = "john@example.com"},
-                new Worker { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com"},
-                new Worker { FirstName = "July", LastName = "Dooley", Email = "july@example.com"}
+                new Worker { FirstName = "John", LastName = "Doe", Email = "john@example.com", StartDate = DateTime.Parse("2005-09-01")},
+                new Worker { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com", StartDate = DateTime.Parse("2005-09-01")},
+                new Worker { FirstName = "July", LastName = "Dooley", Email = "july@example.com", StartDate = DateTime.Parse("2005-09-01")}
             };
 
             foreach (Worker w in workers)
