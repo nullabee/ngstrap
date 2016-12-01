@@ -1,5 +1,5 @@
 {
-  "name": "thecookiejar",
+  "name": "omgnuts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thecookiejar/bones-aspnetcore1.0-NG.git"
+    "url": "git+https://github.com/omgnuts/ngstrap.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thecookiejar/bones-aspnetcore1.0-NG/issues"
+    "url": "https://github.com/omgnuts/ngstrap/issues"
   },
-  "homepage": "https://github.com/thecookiejar/bones-aspnetcore1.0-NG#readme"
+  "homepage": "https://github.com/omgnuts/ngstrap#readme"
 }

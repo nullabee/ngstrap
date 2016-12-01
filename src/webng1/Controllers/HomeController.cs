@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace web.Controllers
+namespace webng1.Controllers
 {
     public class HomeController : Controller
     {

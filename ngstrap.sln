@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "api", "src\api\api.xproj", "{3C46BE8C-8A7D-440D-AA0A-0CF0690781C0}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "web", "src\web\web.xproj", "{F1B14B7D-0828-4B4F-937A-3F980D057D36}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "webng1", "src\webng1\webng1.xproj", "{F1B14B7D-0828-4B4F-937A-3F980D057D36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

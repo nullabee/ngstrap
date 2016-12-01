@@ -1,8 +1,8 @@
 {
-  "name": "TheCookieJar",
-  "homepage": "https://github.com/thecookiejar",
+  "name": "omgnuts",
+  "homepage": "https://github.com/omgnuts",
   "authors": [
-    "thecookiejar <nil>"
+    "omgnuts <nil>"
   ],
   "description": "",
   "main": "",
@@ -11,7 +11,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "src/web/wwwroot/vendor",
+    "wwwroot/vendor",
     "test",
     "tests"
   ],

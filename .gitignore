@@ -189,7 +189,8 @@ $RECYCLE.BIN/
 .vs/
 
 # Bower
-src/web/wwwroot/vendor/
+src/webng1/wwwroot/vendor/
+src/webng2/wwwroot/vendor/
 
 # NodeJS
 node_modules/
