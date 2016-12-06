@@ -187,6 +187,7 @@ $RECYCLE.BIN/
 
 # Visual Studio temp something
 .vs/
+project.lock.json
 
 # Bower
 src/webng1/wwwroot/vendor/
