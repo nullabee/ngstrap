@@ -1,14 +1,14 @@
 ﻿/// <binding BeforeBuild='lib' />
 "use strict";
 
-var gulp = require("gulp"),
+let gulp = require("gulp"),
     series = require('stream-series'),
     inject = require('gulp-inject'),
     wiredep = require('wiredep').stream;
 
-var webroot = "./wwwroot/";
+let webroot = "./wwwroot/";
 
-var paths = {
+let paths = {
     ngModule:       webroot + "app/**/*.module.js",
     ngRoute:        webroot + "app/**/*.route.js",
     ngService:      webroot + "app/**/*.service.js",
@@ -17,17 +17,17 @@ var paths = {
     style:          webroot + "css/**/*.css"
 };
 
-gulp.task('injector', function () {
-    var moduleSrc = gulp.src(paths.ngModule, { read: false });
-    var routeSrc = gulp.src(paths.ngRoute, { read: false });
-    var serviceSrc = gulp.src(paths.ngService, { read: false });
-    var controllerSrc = gulp.src(paths.ngController, { read: false });
-    var scriptSrc = gulp.src(paths.script, { read: false });
-    var styleSrc = gulp.src(paths.style, { read: false });
+gulp.task('injector', () => {
+    let moduleSrc = gulp.src(paths.ngModule, { read: false });
+    let routeSrc = gulp.src(paths.ngRoute, { read: false });
+    let serviceSrc = gulp.src(paths.ngService, { read: false });
+    let controllerSrc = gulp.src(paths.ngController, { read: false });
+    let scriptSrc = gulp.src(paths.script, { read: false });
+    let styleSrc = gulp.src(paths.style, { read: false });
 
     gulp.src(webroot + 'app/index.html')
         .pipe(wiredep({
-            bowerJson: require('./../../bower.json'),
+            bowerJson: require('./bower.json'),
             directory: webroot + 'vendor/',
             optional: 'configuration',
             goes: 'here',
