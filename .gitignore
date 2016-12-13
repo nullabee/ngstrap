@@ -6,32 +6,56 @@
 # User-specific files
 *.suo
 *.user
+*.userosscache
 *.sln.docstates
 
-# Build results
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
 
+# Build results
 [Dd]ebug/
+[Dd]ebugPublic/
 [Rr]elease/
+[Rr]eleases/
 x64/
+x86/
 build/
+bld/
 [Bb]in/
 [Oo]bj/
 
-# NuGet Packages
-*.nupkg
-# The packages folder can be ignored because of Package Restore
-**/packages/*
-# except build/, which is used as an MSBuild target.
-!**/packages/build/
-# Uncomment if necessary however generally it will be regenerated when needed
-#!**/packages/repositories.config
+# Visual Studio 2015 cache/options directory
+.vs/
+/wwwroot/dist/**
+/ClientApp/dist/**
+
+# Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
+!/wwwroot/dist/_placeholder.txt
+!/ClientApp/dist/_placeholder.txt
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# Visual Studio temp something
+project.lock.json
+
+# DNX
+project.lock.json
+artifacts/
+
 *_i.c
 *_p.c
+*_i.h
 *.ilk
 *.meta
 *.obj
@@ -51,12 +75,8 @@ build/
 *.vssscc
 .builds
 *.pidb
-*.log
+*.svclog
 *.scc
-
-# OS generated files #
-.DS_Store*
-Icon?
 
 # Visual C++ cache files
 ipch/
@@ -70,6 +90,10 @@ ipch/
 *.psess
 *.vsp
 *.vspx
+*.sap
+
+# TFS 2012 Local Workspace
+$tf/
 
 # Guidance Automation Toolkit
 *.gpState
@@ -77,6 +101,10 @@ ipch/
 # ReSharper is a .NET coding add-in
 _ReSharper*/
 *.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# JustCode is a .NET coding add-in
+.JustCode
 
 # TeamCity is a build add-in
 _TeamCity*
@@ -85,8 +113,16 @@ _TeamCity*
 *.dotCover
 
 # NCrunch
-*.ncrunch*
+_NCrunch_*
 .*crunch*.local.xml
+nCrunchTemp_*
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# SASS Compiler cache / Web workbench (sass)
+.sass-cache/
 
 # Installshield output folder
 [Ee]xpress/
@@ -105,30 +141,56 @@ DocProject/Help/html
 publish/
 
 # Publish Web Output
-*.Publish.xml
+*.[Pp]ublish.xml
+*.azurePubxml
+# TODO: Comment the next line if you want to checkin your web deploy settings
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
 
-# Windows Azure Build Output
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/packages/repositories.config
+
+# Microsoft Azure Build Output
 csx
 *.build.csdef
 
+# Microsoft Azure ApplicationInsights config file
+ApplicationInsights.config
+
 # Windows Store app package directory
 AppPackages/
+BundleArtifacts/
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
 
 # Others
-*.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
-*.[Pp]ublish.xml
+*.dbproj.schemaview
 *.pfx
 *.publishsettings
-modulesbin/
-tempbin/
+orleans.codegen.cs
 
-# EPiServer Site file (VPP)
-AppData/
+# Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
+/node_modules/**
+!/node_modules/_placeholder.txt
+node_modules
+
+/yarn.lock
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -140,31 +202,57 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# vim
-*.txt~
-*.swp
-*.swo
- 
-# svn
-.svn
-
-# Remainings from resolvings conflicts in Source Control
-*.orig
-
 # SQL Server files
 **/App_Data/*.mdf
 **/App_Data/*.ldf
 **/App_Data/*.sdf
+*.mdf
+*.ldf
+*.sdf
 
+# Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
 
-#LightSwitch generated files
+# Microsoft Fakes
+FakesAssemblies/
+
+# GhostDoc plugin setting file
+*.GhostDoc.xml
+
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
 GeneratedArtifacts/
-_Pvt_Extensions/
 ModelManifest.xml
+_Pvt_Extensions
 
-# =========================
-# Windows detritus
-# =========================
+# FAKE - F# Make
+.fake/
+
+# Paket dependency manager
+.paket/paket.exe
+
+# EPiServer Site file (VPP)
+AppData/
+
+# VIM editor
+*.txt~
+*.swp
+*.swo
 
 # Windows image file caches
 Thumbs.db
@@ -176,25 +264,27 @@ Desktop.ini
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-# Mac desktop service store files
-.DS_Store
-
-# SASS Compiler cache
-.sass-cache
 
 # Visual Studio 2014 CTP
 **/*.sln.ide
 
-# Visual Studio temp something
-.vs/
-project.lock.json
+# Mac desktop service store files
+.DS_Store
+.DS_Store*
+Icon?
+
+# svn
+.svn
+
+# Remainings from resolvings conflicts in Source Control
+*.orig
 
 # Bower
 src/webng1/wwwroot/vendor/
 src/webng2/wwwroot/vendor/
 
-# NodeJS
-node_modules/
+modulesbin/
+tempbin/
 
 
 #####
