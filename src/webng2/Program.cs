@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace webng2
 {
@@ -17,8 +13,9 @@ namespace webng2
                 .AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .Build();
 
+
             var host = new WebHostBuilder()
-                .UseConfiguration(config)
+                //.UseConfiguration(config)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
@@ -26,6 +23,7 @@ namespace webng2
                 .Build();
 
             host.Run();
+
         }
     }
 }

@@ -11,6 +11,15 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "environmentVariables": {
+        "ASPNETCORE_URL": "http://localhost:7000/",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Web (Dev)": {
+      "commandName": "Project",
+      "launchUrl": "http://localhost:7000/",
+      "environmentVariables": {
+        "ASPNETCORE_URL": "http://localhost:7000/",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }

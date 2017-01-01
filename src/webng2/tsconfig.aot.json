@@ -1,18 +1,28 @@
 {
+  // NG2CompilerOptions: auto-generate ngfactories
+  // https: //github.com/angular/angular/blob/master/tools/%40angular/tsc-wrapped/src/options.ts
+  "angularCompilerOptions": {
+    "genDir": "gen/ngfactory",
+    "skipMetadataEmit": true,
+    "trace": true,
+    "debug": true
+  },
+
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
-    "removeComments": false,
+    "removeComments": true,
     "noImplicitAny": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
     "lib": [ "es5", "es6", "dom" ],
     "types": [ "node" ],
-    "outDir": "gen/js"
+    "outDir": "gen/aotjs"
   },
   "exclude": [
     "TypingsDef",
@@ -20,9 +30,6 @@
     "gen/ngfactory",
     "**/*.spec.ts"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
-  },
   "compileOnSave": false,
   "buildOnSave": false
 }
