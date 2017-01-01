@@ -1,11 +1,11 @@
 @echo on
 
-rd %USERPROFILES%\.nuget\packages /s /q
-rd %USERPROFILES%\AppData\Roaming\npm-cache /s /q
-rd src\webng2\node_modules /s /q
+rem rd %USERPROFILES%\.nuget\packages /s /q
+rem rd %USERPROFILES%\AppData\Roaming\npm-cache /s /q
+rem rd src\webng2\node_modules /s /q
 
 rd publish /s /q
-rd publish.tmp /s /q
+rd publish_tmp /s /q
 del publish*.zip 
 
 del /S project.lock.json
