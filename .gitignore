@@ -282,10 +282,6 @@ Icon?
 # Bower
 src/webng1/wwwroot/vendor/
 
-src/webng2/gen/
-src/webng2/wwwroot/
-src/webng2/View/
-
 #####
 # End of core ignore list, below put you custom 'per project' settings (patterns or path)
 #####

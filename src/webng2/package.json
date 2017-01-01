@@ -5,15 +5,13 @@
   "license": "MIT",
   "scripts": {
     "gdeps": "npm list -g --depth=0",
-    "cleanunix": "rm -rf gen",
-    "cleanwin": "rd gen /s /q",
-    "ngx": "ngc",
-    "ngc": "ngc -p tsconfig.aot.json",
-    "start": "concurrently \"webpack-dev-server --inline --progress --port 8080\" \"dotnet run \"",
+    "clean": "rimraf gen wwwroot Views",
+    "ngc": "ngc -p tsconfig.json",
     "webpack-dev": "set NODE_ENV=development && webpack",
     "webpack-prod": "set NODE_ENV=production && webpack",
-    "build": "npm run webpack-dev",
-    "build-prod": "npm run ngc && npm run webpack-prod"
+    "build": "npm run clean && npm run webpack-dev",
+    "build-prod": "npm run clean && npm run ngc && npm run webpack-prod",
+    "start": "concurrently \"webpack-dev-server --inline --progress --port 8080\" \"dotnet run \""
   },
   "dependencies": {
     "@angular/common": "~2.4.1",

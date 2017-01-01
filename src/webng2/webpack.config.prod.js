@@ -15,9 +15,9 @@ module.exports = {
 
     //devtool: "source-map",
 
-    //performance: {
-    //    hints: false
-    //},
+    performance: {
+        hints: false
+    },
 
     entry: {
         "polyfills": "./ngApp/polyfills.ts",
