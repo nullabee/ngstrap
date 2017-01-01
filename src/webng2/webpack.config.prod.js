@@ -50,7 +50,7 @@ module.exports = {
                 loaders: [
                     "awesome-typescript-loader",
                     "angular2-template-loader",
-                    "angular-router-loader?aot=true&genDir=gen/ngfactory/ngApp",
+                    "angular-router-loader?aot=true&genDir=gen/ngfactory/ngApp/app",
                     //"source-map-loader"
                 ]
             },
