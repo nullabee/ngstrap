@@ -3,7 +3,7 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "strictNullChecks": true,
     "removeComments": false,
     "noImplicitAny": true,
@@ -15,6 +15,7 @@
     "outDir": "gen/js"
   },
   "exclude": [
+    "ngApp/main.aot.ts",
     "TypingsDef",
     "node_modules",
     "gen/ngfactory",

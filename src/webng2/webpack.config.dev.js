@@ -44,7 +44,7 @@ module.exports = {
         rules: [
             {
                 test: /\.ts$/,
-                exclude: /node_modules/,
+                //exclude: /node_modules/,
                 loaders: [
                     "awesome-typescript-loader",
                     "angular2-template-loader",

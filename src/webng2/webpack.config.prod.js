@@ -27,7 +27,7 @@ module.exports = {
 
     output: {
         path: "wwwroot",
-        filename: "dist/[name].[hash].prod.min.js",
+        filename: "dist/[name].[hash:6].prod.min.js",
         publicPath: "/"
     },
 

@@ -5,16 +5,16 @@ import { HttpModule } from "@angular/http";
 import { AppComponent } from "./app.component";
 import { AppRoutesModule } from "./app.routes";
 
-import { HomeModule } from "./home/home.module";
+//import { HomeModule } from "./home/home.module";
 
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
 
-        AppRoutesModule,
+        AppRoutesModule
 
-        HomeModule
+        //HomeModule
     ],
     declarations: [AppComponent],
     providers: [],
