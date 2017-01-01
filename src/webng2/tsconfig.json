@@ -24,6 +24,7 @@
     "types": [ "node" ],
     "outDir": "gen/js"
   },
+
   "exclude": [
     //"ngApp/main.aot.ts",
     "TypingsDef",
@@ -31,6 +32,7 @@
     "gen/ngfactory",
     "**/*.spec.ts"
   ],
+
   "compileOnSave": false,
   "buildOnSave": false
 }
