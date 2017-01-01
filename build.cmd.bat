@@ -68,7 +68,8 @@
 @echo -----------------------------------------------------------------------
 
 @dotnet restore
-@dotnet publish %_NGWEB_% --framework netcoreapp1.1 --build-base-path %_BASEPATH_%\publish_tmp --output %_BASEPATH_%\publish --configuration Release 
+@dotnet publish %_NGWEB_% --framework net462 --build-base-path %_BASEPATH_%\publish_tmp --output %_BASEPATH_%\publish --configuration Release 
+@rem dotnet publish %_NGWEB_% --framework netcoreapp1.1 --build-base-path %_BASEPATH_%\publish_tmp --output %_BASEPATH_%\publish --configuration Release 
 @rem --runtime win10-x64
 
 @echo -----------------------------------------------------------------------
