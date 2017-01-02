@@ -16,7 +16,7 @@
     },
     "Web (Api)": {
       "commandName": "Project",
-      "launchUrl": "http://localhost:7001",
+      "commandLineArgs": "--server.urls http://localhost:7001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

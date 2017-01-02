@@ -14,7 +14,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Web (Dev)": {
+    "Web (Ng2)": {
       "commandName": "Project",
       "commandLineArgs": "--server.urls http://localhost:7000",
       "environmentVariables": {
