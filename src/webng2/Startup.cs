@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IO.Compression;
 
 namespace webng2
 {
@@ -15,6 +17,7 @@ namespace webng2
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -23,6 +26,14 @@ namespace webng2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Gzip services
+            services.Configure<GzipCompressionProviderOptions>
+                (options => options.Level = CompressionLevel.Fastest);
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -45,6 +56,8 @@ namespace webng2
                 //app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseResponseCompression();
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -54,14 +67,6 @@ namespace webng2
                     template: "{*url}",
                     defaults: new { controller = "App", action = "Index" }
                 );
-
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Home}/{action=Index}/{id?}");
-
-                //routes.MapSpaFallbackRoute(
-                //    name: "spa-fallback",
-                //    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

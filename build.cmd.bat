@@ -82,6 +82,7 @@
 @>NUL 2>&1 copy %_NGWEB_%\package.json  %_BASEPATH_%\publish
 @>NUL 2>&1 copy %_BASEPATH_%\configs\web.config %_BASEPATH_%\publish
 @>NUL 2>&1 copy %_BASEPATH_%\configs\appsettings.json %_BASEPATH_%\publish
+@>NUL 2>&1 copy %_BASEPATH_%\configs\run-server.bat %_BASEPATH_%\publish
 
 @echo -----------------------------------------------------------------------
 @echo.

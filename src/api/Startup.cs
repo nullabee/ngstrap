@@ -41,7 +41,7 @@ namespace api
             }
 
             services.AddMvc()
-                // return JSON response in form of Camel Case so that we can sure consume the API in any client. 
+                // return JSON response in form of Camel Case so that we can sure consume the API in any client.
                 // Enable CamelCasePropertyNamesContractResolver in Configure Services.
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
@@ -57,7 +57,7 @@ namespace api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, 
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
             ILoggerFactory loggerFactory, DataContext context)
         {
             loggerFactory.AddConsole();
@@ -65,10 +65,10 @@ namespace api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            } 
+            }
 
             app.UseCors("AllowAllOrigins");
-            
+
             // Perform the routing
             app.UseMvc();
 
