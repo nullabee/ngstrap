@@ -25,7 +25,7 @@ module.exports = {
 
     output: {
         path: "wwwroot",
-        filename: "dist/[name].dev.js",
+        filename: "dist/[name].[hash:6].dev.js",
         publicPath: "/"
     },
 

@@ -20,7 +20,7 @@
     "experimentalDecorators": true,
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
-    "lib": [ "es5", "es6", "dom" ],
+    "lib": [ "es5", "es2015", "dom" ],
     "types": [ "node" ],
     "outDir": "gen/js"
   },
