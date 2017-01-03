@@ -63,10 +63,16 @@ namespace webng2
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "admin_route",
+                    template: "admin/{controller=Admin}",
+                    defaults: new { action = "Index" } );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{*url}",
                     defaults: new { controller = "App", action = "Index" }
                 );
+
             });
         }
     }

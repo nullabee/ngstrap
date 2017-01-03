@@ -9,6 +9,6 @@ import { Globals } from './globals';
 
 export class AppComponent {
 
-    private baseApiUrl = Globals.BASE_API_URL;
+    private baseApiUrl = Globals.API_BASEURI;
 
 }

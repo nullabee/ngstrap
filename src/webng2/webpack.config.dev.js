@@ -96,7 +96,16 @@ module.exports = {
                 chunks: ["polyfills", "vendor", "app"],
                 template: "ngApp/razor/App.cshtml",
                 inject: true,
-                filename: "./../Views/App/Index.cshtml",
+                filename: "./../Views/App/Index.cshtml"
+            }
+        ),
+
+        new HtmlWebpackPlugin(
+            {
+                chunks: ["polyfills", "vendor", "app"],
+                template: "ngApp/razor/Admin.cshtml",
+                inject: true,
+                filename: "./../Views/Admin/Index.cshtml",
             }
         ),
 

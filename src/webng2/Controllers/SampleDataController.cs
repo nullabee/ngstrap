@@ -6,13 +6,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace webng2.Controllers
 {
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+
+        [HttpGet]
+        public string Get()
+        {
+            return "GET: Test messssssage";
+        }
 
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
