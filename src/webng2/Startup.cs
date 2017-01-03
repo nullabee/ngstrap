@@ -58,14 +58,24 @@ namespace webng2
 
             app.UseResponseCompression();
 
+            // Makes the files in web root (wwwroot by default) servable.
+            // https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions()
+            //{
+            //    //A request to http://<app>/StaticFiles/test.png will serve the test.png file.
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(Directory.GetCurrentDirectory(), @"MyStaticFiles")),
+            //    RequestPath = new PathString("/StaticFiles")
+            //});
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "admin_route",
-                    template: "admin/{controller=Admin}",
-                    defaults: new { action = "Index" } );
+                //routes.MapRoute(
+                //    name: "admin_catchall",
+                //    template: "admin/{*url}",
+                //    defaults: new { controller = "Admin", action = "Index" }
+                //    );
 
                 routes.MapRoute(
                     name: "default",
