@@ -13,8 +13,6 @@ import { AppRoutesModule } from "./app.routes";
         HttpModule,
 
         AppRoutesModule
-
-        //HomeModule
     ],
     declarations: [AppComponent],
     providers: [],

@@ -1,10 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { HomeComponent } from "./home/home.component";
-
 export const routes: Routes = [
-    { path: "", loadChildren: "./home/home.module#HomeModule?chunkName=home" },
+    { path: "", loadChildren: "./+home/home.module#HomeModule?chunkName=home" },
     { path: "admin", loadChildren: "./+admin/admin.module#AdminModule?chunkName=admin" },
     { path: "**", redirectTo: "", pathMatch: "full" },
 ];
