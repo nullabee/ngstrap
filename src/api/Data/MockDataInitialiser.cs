@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Linq;
 using api.Models;
 
@@ -10,109 +11,89 @@ namespace api.Data
         {
             context.Database.EnsureCreated();
 
-            if (!InitWorkers(context)) return;
-            if (!InitStudents(context)) return;
+            if (!InitTasks(context)) return;
+            InitTasks(context);
 
-            InitCourses(context);
-            InitEnrollment(context);
         }
 
-        private static bool InitWorkers(DataContext context)
+        private static bool InitTasks(DataContext context)
         {
             // Look for any students.
-            if (context.Workers.Any())
+            if (context.Tasks.Any())
             {
                 return false;   // DB has been seeded
             }
 
-            var workers = new Worker[]
+            var tasks = new Task[20];
+            for (int c = 0; c < tasks.Length; c++) {
+                tasks[c] = new Task()
+                {
+                    Title = MockTask.Title(c),
+                    Description = MockTask.Description(c),
+                    UserId = MockTask.UserId(),
+                    CreatedDT = MockTask.randDT(true),
+                    DueDT = MockTask.randDT(),
+                    Priority = MockTask.randPriority(),
+                    SystId = MockTask.RandSystId()
+                };
+            }
+            
+            foreach (Task w in tasks)
             {
-                new Worker { FirstName = "John", LastName = "Doe", Email = "john@example.com", StartDate = DateTime.Parse("2005-09-01")},
-                new Worker { FirstName = "Mary", LastName = "Moe", Email = "mary@example.com", StartDate = DateTime.Parse("2005-09-01")},
-                new Worker { FirstName = "July", LastName = "Dooley", Email = "july@example.com", StartDate = DateTime.Parse("2005-09-01")}
-            };
-
-            foreach (Worker w in workers)
-            {
-                context.Workers.Add(w);
+                context.Tasks.Add(w);
             }
             context.SaveChanges();
 
             return true;
         }
 
-
-        private static bool InitStudents(DataContext context)
+        static class MockTask
         {
-            // Look for any students.
-            if (context.Students.Any())
-            {
-                return false;   // DB has been seeded
-            }
+            private static Random rand = new Random();
 
-            var students = new Student[]
+            private static string title = "Update database structure for new module (prod)";
+            private static string descr = "New datetime field has been added to keep track of the datetime whenever records are updated.";
+            private static string[] apps = new string[]
             {
-                new Student{FirstName="Carson",LastName="Alexander",Email="Carson@email.com",EnrollmentDate=DateTime.Parse("2005-09-01")},
-                new Student{FirstName="Meredith",LastName="Alonso",Email="Alonso@email.com",EnrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{FirstName="Arturo",LastName="Anand",Email="Anand@email.com",EnrollmentDate=DateTime.Parse("2003-09-01")},
-                new Student{FirstName="Gytis",LastName="Barzdukas",Email="Barzdukas@email.com",EnrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{FirstName="Yan",LastName="Li",Email="Li@email.com",EnrollmentDate=DateTime.Parse("2002-09-01")},
-                new Student{FirstName="Peggy",LastName="Justice",Email="Justice@email.com",EnrollmentDate=DateTime.Parse("2001-09-01")},
-                new Student{FirstName="Laura",LastName="Norman",Email="Norman@email.com",EnrollmentDate=DateTime.Parse("2003-09-01")},
-                new Student{FirstName="Nino",LastName="Olivetto",Email="Olivetto@email.com",EnrollmentDate=DateTime.Parse("2005-09-01")}
+                "prism", "reki", "leave", "daw."
             };
 
-            foreach (Student s in students)
+            public static string Title(int c)
             {
-                context.Students.Add(s);
+                return title + " " + c;
             }
-            context.SaveChanges();
 
-            return true;
+            public static string Description(int c)
+            {
+                return descr + " " + c;
+            }
+
+            public static string UserId()
+            {
+                return "tanjavan";
+            }
+
+            public static string RandSystId()
+            {
+                return apps[rand.Next(0, apps.Length)];
+            }
+
+            public static DateTime randDT(bool past = false)
+            {
+                int m = past ? -1 : 1;
+                return DateTime.Now
+                    .AddDays((past ? 0 : 3) + m * rand.Next(0, 2))
+                    .AddHours(m * rand.Next(0, 24))
+                    .AddMinutes(m * rand.Next(0, 60))
+                    .AddSeconds(m * rand.Next(0, 60));
+            }
+
+            public static Priority randPriority()
+            {
+                return (Priority)rand.Next(0, 2);
+            }
+
         }
 
-        private static void InitCourses(DataContext context)
-        {
-            var courses = new Course[]
-            {
-                new Course{CourseID=1050,Title="Chemistry",Credits=3,},
-                new Course{CourseID=4022,Title="Microeconomics",Credits=3,},
-                new Course{CourseID=4041,Title="Macroeconomics",Credits=3,},
-                new Course{CourseID=1045,Title="Calculus",Credits=4,},
-                new Course{CourseID=3141,Title="Trigonometry",Credits=4,},
-                new Course{CourseID=2021,Title="Composition",Credits=3,},
-                new Course{CourseID=2042,Title="Literature",Credits=4,}
-            };
-            foreach (Course c in courses)
-            {
-                context.Courses.Add(c);
-            }
-            context.SaveChanges();
-        }
-
-        private static void InitEnrollment(DataContext context)
-        {
-
-            var enrollments = new Enrollment[]
-            {
-                new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},
-                new Enrollment{StudentID=1,CourseID=4022,Grade=Grade.C},
-                new Enrollment{StudentID=1,CourseID=4041,Grade=Grade.B},
-                new Enrollment{StudentID=2,CourseID=1045,Grade=Grade.B},
-                new Enrollment{StudentID=2,CourseID=3141,Grade=Grade.F},
-                new Enrollment{StudentID=2,CourseID=2021,Grade=Grade.F},
-                new Enrollment{StudentID=3,CourseID=1050},
-                new Enrollment{StudentID=4,CourseID=1050,},
-                new Enrollment{StudentID=4,CourseID=4022,Grade=Grade.F},
-                new Enrollment{StudentID=5,CourseID=4041,Grade=Grade.C},
-                new Enrollment{StudentID=6,CourseID=1045},
-                new Enrollment{StudentID=7,CourseID=3141,Grade=Grade.A},
-            };
-            foreach (Enrollment e in enrollments)
-            {
-                context.Enrollments.Add(e);
-            }
-            context.SaveChanges();
-        }
     }
 }

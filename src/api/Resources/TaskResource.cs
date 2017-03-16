@@ -6,60 +6,58 @@ using api.Data;
 
 namespace api.Resources
 {
-    public class StudentResource : IResource<Student>
+    public class TaskResource : IResource<Task>
     {
         private readonly DataContext context;
-
-        public StudentResource(DataContext context)
+        
+        public TaskResource(DataContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<Student> GetAll()
+        public IEnumerable<Task> GetAll()
         {
-            return context.Students;
+            return context.Tasks;
         }
 
-        public Student Find(string key)
+        public Task Find(string key)
         {
-            int id = Int32.Parse(key);
-            return context.Students
-                .Where(r => r.Id == id)
+            return context.Tasks
+                .Where(r => r.Id.Equals(key))
                 .SingleOrDefault();
         }
 
-        public void Add(Student item)
+        public void Add(Task item)
         {
-            context.Students.Add(item);
+            context.Tasks.Add(item);
             context.SaveChanges();
         }
-        
+
         public bool Remove(string key)
         {
             var res = Find(key);
             if (res != null)
             {
-                context.Students.Remove(res);
+                context.Tasks.Remove(res);
                 context.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public bool Update(Student item)
+        public bool Update(Task item)
         {
-            var res = Find(item.Id.ToString());
+            var res = Find(item.Id);
             if (res != null)
             {
-                res.FirstName = item.FirstName;
-                res.LastName = item.LastName;
-                res.Email = item.Email;
+                res.Title = item.Title;
+                res.Description = item.Description;
+                res.UserId = item.UserId;
                 context.SaveChanges();
                 return true;
             }
 
-            return false;
-            
+            return false;           
         }
     }
 }

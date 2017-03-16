@@ -6,17 +6,17 @@ using api.Resources;
 namespace api.Controllers
 {
     [Route("api/[controller]")]
-    public class TodoController : Controller
+    public class TaskController : Controller
     {
-        private IResource<Todo> resource { get; set; }
+        private IResource<Task> resource { get; set; }
 
-        public TodoController(IResource<Todo> resource)
+        public TaskController(IResource<Task> resource)
         {
             this.resource = resource;
         }
 
         [HttpGet]
-        public IEnumerable<Todo> GetAll() 
+        public IEnumerable<Task> GetAll() 
         {
             return resource.GetAll();
         }
@@ -33,20 +33,20 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Todo item)
+        public IActionResult Create([FromBody] Task item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
             resource.Add(item);
-            return CreatedAtRoute(new { id = item.Key }, item);
+            return CreatedAtRoute(new { id = item.Id }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, [FromBody] Todo item)
+        public IActionResult Update(string id, [FromBody] Task item)
         {
-            if (item == null || item.Key != id)
+            if (item == null || item.Id != id)
             {
                 return BadRequest();
             }
@@ -62,7 +62,7 @@ namespace api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update([FromBody] Todo item, string id)
+        public IActionResult Update([FromBody] Task item, string id)
         {
             if (item == null)
             {
@@ -75,7 +75,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            item.Key = res.Key;
+            item.Id = res.Id;
 
             resource.Update(item);
             return new NoContentResult();

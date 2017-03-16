@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace api.Controllers
 {
     [Route("api/[controller]")]
-    [Route("More")]
-    public class MoreController : Controller
+    public class Test1Controller : Controller
     {
         [HttpGet]
-        [Route("Something")]
         public string Get()
         {
-            return "GET: This";
+            return "GET: Test messssssage";
         }
 
         [HttpPost]

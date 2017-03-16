@@ -47,10 +47,7 @@ namespace api
                 .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
 
             // using Dependency Injection
-            //services.AddSingleton<IResource<Todo>, TodoResource>();
-            //services.AddSingleton<IResource<Contact>, ContactResource>();
-            services.AddTransient<IResource<Student>, StudentResource>();
-            services.AddTransient<IResource<Worker>, WorkerResource>();
+            services.AddTransient<IResource<Task>, TaskResource>();
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
