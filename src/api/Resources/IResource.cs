@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace api.Resources
 {
     public interface IResource<T>
     {
         IEnumerable<T> GetAll();
-        T Find(string key);
+        T Find(int key);
         void Add(T item);
-        bool Remove(string key);
+        bool Remove(int key);
         bool Update(T item);
     }
 }

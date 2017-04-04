@@ -35,7 +35,17 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        {
+        { 
+            {
+                services.AddTransient<IResource<Platform>, PlatformResource>();
+                services.AddTransient<IResource<Task>, TaskResource>();
+
+                services.AddDbContext<WorkContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                });
+            }
+
             {
                 // Enable CORS
                 services.AddCors(options =>
@@ -70,7 +80,7 @@ namespace api
                 });
                 services.Configure<MvcOptions>(options =>
                 {
-                    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigins"));
+                    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
                 });
             }
 
@@ -99,22 +109,11 @@ namespace api
                 });
 
             }
-
-            {   
-                // using Dependency Injection for data context
-                services.AddTransient<IResource<Task>, TaskResource>();
-                services.AddDbContext<DataContext>(options =>
-                {
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                });
-
-            }
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
-            ILoggerFactory loggerFactory, DataContext context)
+            ILoggerFactory loggerFactory, WorkContext context)
         {
             loggerFactory.AddConsole();
 
@@ -124,15 +123,15 @@ namespace api
                 app.UseDatabaseErrorPage();
             }
 
-            app.UseCors("AllowSpecificOrigin");
+            app.UseCors("AllowAllOrigins");
             
             app.UseResponseCompression();
 
             // Perform the routing
             app.UseMvc();
 
-            // Mock InitializeMockIfEmpty the DB
-            MockDataInitialiser.InitializeMockIfEmpty(context);
+            // Mock InitializeMockData the DB
+            MockDataInitialiser.InitializeMockData(context);
 
         }
 

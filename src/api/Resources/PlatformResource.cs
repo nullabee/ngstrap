@@ -6,30 +6,30 @@ using api.Data;
 
 namespace api.Resources
 {
-    public class TaskResource : IResource<Task>
+    public class PlatformResource : IResource<Platform>
     {
         private readonly WorkContext context;
-        
-        public TaskResource(WorkContext context)
+
+        public PlatformResource(WorkContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<Task> GetAll()
+        public IEnumerable<Platform> GetAll()
         {
-            return context.Tasks;
+            return context.Platforms;
         }
 
-        public Task Find(int key)
+        public Platform Find(int key)
         {
-            return context.Tasks
-                .Where(r => r.TaskID.Equals(key))
+            return context.Platforms
+                .Where(r => r.PlatformID.Equals(key))
                 .SingleOrDefault();
         }
 
-        public void Add(Task item)
+        public void Add(Platform item)
         {
-            context.Tasks.Add(item);
+            context.Platforms.Add(item);
             context.SaveChanges();
         }
 
@@ -38,26 +38,24 @@ namespace api.Resources
             var res = Find(key);
             if (res != null)
             {
-                context.Tasks.Remove(res);
+                context.Platforms.Remove(res);
                 context.SaveChanges();
                 return true;
             }
             return false;
         }
 
-        public bool Update(Task item)
+        public bool Update(Platform item)
         {
-            var res = Find(item.TaskID);
+            var res = Find(item.PlatformID);
             if (res != null)
             {
-                res.Title = item.Title;
-                res.Description = item.Description;
-                res.UserID = item.UserID;
+                res.PlatformName = item.PlatformName;
                 context.SaveChanges();
                 return true;
             }
 
-            return false;           
+            return false;
         }
     }
 }

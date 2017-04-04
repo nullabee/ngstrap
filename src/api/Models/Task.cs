@@ -11,7 +11,7 @@ namespace api.Models
     public class Task
     {
         [Required]
-        public string Id { get; set; }
+        public int TaskID { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -20,7 +20,7 @@ namespace api.Models
         public string Description { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        public string UserID { get; set; }
 
         [Required]
         public DateTime CreatedDT { get; set; }
@@ -30,10 +30,12 @@ namespace api.Models
 
         [Required]
         public Priority Priority { get; set; }
-
-        [Required]
-        public string SystId { get; set; }
         
+        public Platform Platform { get; set; }
+
+        [Required] // only for mock seeding
+        public int PlatformID { get; set; }
+
     }
 
 }

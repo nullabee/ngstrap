@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Linq;
 using api.Models;
 
@@ -8,78 +7,70 @@ namespace api.Data
     //https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
     public static class MockDataInitialiser
     {
-        public static void InitializeMockIfEmpty(DataContext context)
+        public static void InitializeMockData(WorkContext context)
         {
             context.Database.EnsureCreated();
-
-            if (!InitTasks(context)) return;
-            InitTasks(context);
-
-        }
-
-        private static bool InitTasks(DataContext context)
-        {
-            // Look for any students.
+            
+            // Look for any tasks.
             if (context.Tasks.Any())
             {
-                return false;   // DB has been seeded
+                return;   // DB has been seeded
             }
 
-            var tasks = new Task[20];
-            for (int c = 0; c < tasks.Length; c++) {
-                tasks[c] = new Task()
-                {
-                    Title = MockTask.Title(c),
-                    Description = MockTask.Description(c),
-                    UserId = MockTask.UserId(),
-                    CreatedDT = MockTask.randDT(true),
-                    DueDT = MockTask.randDT(),
-                    Priority = MockTask.randPriority(),
-                    SystId = MockTask.RandSystId()
-                };
-            }
-            
-            foreach (Task w in tasks)
+            // Add platforms
             {
-                context.Tasks.Add(w);
-            }
-            context.SaveChanges();
+                var platforms = new Platform[]
+                {
+                    new Platform { PlatformID = 1000, PlatformName = "E-Leave" },
+                    new Platform { PlatformID = 2000, PlatformName = "E-Tender" }
+                };
 
-            return true;
+                foreach (Platform p in platforms)
+                {
+                    context.Platforms.Add(p);
+                }
+                context.SaveChanges();
+            }
+
+            // Add tasks 
+            {
+                var tasks = new Task[]
+                {
+                    MockTaskFactory.Generate(1, 1000),
+                    MockTaskFactory.Generate(2, 2000),
+                    MockTaskFactory.Generate(3, 1000),
+                    MockTaskFactory.Generate(4, 2000)
+                };
+
+                foreach (Task t in tasks)
+                {
+                    context.Tasks.Add(t);
+                }
+                context.SaveChanges();
+            }
+
         }
 
-        static class MockTask
+        static class MockTaskFactory 
         {
-            private static Random rand = new Random();
-
-            private static string title = "Update database structure for new module (prod)";
-            private static string descr = "New datetime field has been added to keep track of the datetime whenever records are updated.";
-            private static string[] apps = new string[]
+            internal static Task Generate(int taskID, int platformID)
             {
-                "prism", "reki", "leave", "daw."
-            };
-
-            public static string Title(int c)
-            {
-                return title + " " + c;
+                return new Task
+                {
+                    TaskID = taskID,
+                    Title = "Task " + taskID,
+                    Description = "Descr " + taskID,
+                    UserID = "javan",
+                    CreatedDT = randDT(),
+                    DueDT = randDT(),
+                    Priority = randPriority(),
+                    PlatformID = platformID
+                };
             }
 
-            public static string Description(int c)
-            {
-                return descr + " " + c;
-            }
+            static Random rand = new Random();
 
-            public static string UserId()
-            {
-                return "tanjavan";
-            }
-
-            public static string RandSystId()
-            {
-                return apps[rand.Next(0, apps.Length)];
-            }
-
-            public static DateTime randDT(bool past = false)
+            static DateTime randDT(bool past = false)
             {
                 int m = past ? -1 : 1;
                 return DateTime.Now

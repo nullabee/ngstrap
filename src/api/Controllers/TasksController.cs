@@ -5,12 +5,12 @@ using api.Resources;
 
 namespace api.Controllers
 {
-    [Route("api/[controller]")]
-    public class TaskController : Controller
+    [Route("api/v1/[controller]")]
+    public class TasksController : Controller
     {
         private IResource<Task> resource { get; set; }
 
-        public TaskController(IResource<Task> resource)
+        public TasksController(IResource<Task> resource)
         {
             this.resource = resource;
         }
@@ -22,7 +22,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(string id)
+        public IActionResult GetById(int id)
         {
             var res = resource.Find(id);
             if (res == null)
@@ -40,13 +40,13 @@ namespace api.Controllers
                 return BadRequest();
             }
             resource.Add(item);
-            return CreatedAtRoute(new { id = item.Id }, item);
+            return CreatedAtRoute(new { id = item.TaskID }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(string id, [FromBody] Task item)
+        public IActionResult Update(int id, [FromBody] Task item)
         {
-            if (item == null || item.Id != id)
+            if (item == null || item.TaskID != id)
             {
                 return BadRequest();
             }
@@ -62,7 +62,7 @@ namespace api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update([FromBody] Task item, string id)
+        public IActionResult Update([FromBody] Task item, int id)
         {
             if (item == null)
             {
@@ -75,14 +75,14 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            item.Id = res.Id;
+            item.TaskID = res.TaskID;
 
             resource.Update(item);
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
             var res = resource.Find(id);
             if (res == null)
