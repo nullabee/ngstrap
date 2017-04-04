@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using System.IO.Compression;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Http;
 
 namespace api
 {
@@ -97,12 +99,11 @@ namespace api
             }
             
             {
+                //services.AddRouting();
+                services.AddMvc();
+
                 // return JSON response in form of Camel Case so that we can sure consume the API in any client.
                 // Enable CamelCasePropertyNamesContractResolver in Configure Services.
-                //services.AddMvc().AddJsonOptions(
-                //    options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver()
-                //);
-                services.AddMvc();
                 services.Configure<MvcJsonOptions>(options =>
                 {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
@@ -128,13 +129,42 @@ namespace api
             app.UseResponseCompression();
 
             // Perform the routing
-            app.UseMvc();
-
+            //app.UseRouter(CreateRoutes(app).Build());            
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "api/v1/{controller}/{action}/{id?}");
+            });
+            
             // Mock InitializeMockData the DB
             MockDataInitialiser.InitializeMockData(context);
 
         }
+        
+        RouteBuilder CreateRoutes(IApplicationBuilder app)
+        {
+            RouteHandler defaultHandler = new RouteHandler(context =>
+            {   
+                var routeValues = context.GetRouteData().Values;
+                return context.Response.WriteAsync(
+                    $"Strapping Route values: {string.Join(", ", routeValues)}");
+            });
 
+            RouteBuilder routeBuilder = new RouteBuilder(app, defaultHandler);
+
+            routeBuilder.MapRoute(
+                "Track Default Route",
+                "api/v1/{action:regex(^track|create|detonate$)}/{id:int}");
+
+            routeBuilder.MapRoute("readme/{name}", context =>
+            {   
+                var name = context.GetRouteValue("name");
+                return context.Response.WriteAsync($"Hi, {name}!");
+            });
+
+            return routeBuilder;
+        }
     }
 
 }

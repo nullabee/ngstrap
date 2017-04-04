@@ -5,8 +5,7 @@ using api.Resources;
 
 namespace api.Controllers
 {
-    [Route("api/v1/[controller]")]
-    public class TasksController : Controller
+    public class TasksController : ApiController
     {
         private IResource<Task> resource { get; set; }
 
