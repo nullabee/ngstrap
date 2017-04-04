@@ -5,6 +5,7 @@ using api.Models;
 
 namespace api.Data
 {
+    //https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
     public static class MockDataInitialiser
     {
         public static void InitializeMockIfEmpty(DataContext context)

@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Cors.Infrastructure;
-using Newtonsoft.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using api.Data;
 using api.Models;
 using api.Resources;
-using api.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
+using System.IO.Compression;
 
 namespace api
 {
+    /**
+     * ASP.NET Core Reference: https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
+     */
     public class Startup
     {
         public IConfigurationRoot Configuration { get; }
@@ -34,23 +38,77 @@ namespace api
         {
             {
                 // Enable CORS
-                services.AddCors(options => buildCorsOptions(options));
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAllOrigins",
+                        builder =>
+                        {
+                            builder.AllowAnyOrigin()
+                                   .AllowAnyMethod()
+                                   .AllowAnyHeader();
+                        });
+
+                    options.AddPolicy("AllowSpecificOrigin",
+                        builder =>
+                        {
+                            builder.WithOrigins("http://localhost:18080")
+                                   .AllowAnyMethod()
+                                   .AllowAnyHeader();
+                        });
+
+                    /*
+                     * Example below of finer granularity
+                     */
+                    //options.AddPolicy("AllowSpecificOrigin",
+                    //    builder =>
+                    //    {
+                    //        builder.WithOrigins("http://localhost:18080")
+                    //               .WithMethods("GET", "POST")
+                    //               .AllowAnyHeader();
+                    //    });
+
+                });
                 services.Configure<MvcOptions>(options =>
                 {
-                    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowAllOrigins"));
+                    options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigins"));
                 });
             }
 
-            services.AddMvc()
+            {
+                services.AddResponseCompression(options =>
+                {
+                    options.EnableForHttps = true;
+                    options.Providers.Add<GzipCompressionProvider>();
+                });
+                services.Configure<GzipCompressionProviderOptions>(options =>
+                {
+                    options.Level = CompressionLevel.Fastest;
+                });
+            }
+            
+            {
                 // return JSON response in form of Camel Case so that we can sure consume the API in any client.
                 // Enable CamelCasePropertyNamesContractResolver in Configure Services.
-                .AddJsonOptions(a => a.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
+                //services.AddMvc().AddJsonOptions(
+                //    options => options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver()
+                //);
+                services.AddMvc();
+                services.Configure<MvcJsonOptions>(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
 
-            // using Dependency Injection
-            services.AddTransient<IResource<Task>, TaskResource>();
+            }
 
-            services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {   
+                // using Dependency Injection for data context
+                services.AddTransient<IResource<Task>, TaskResource>();
+                services.AddDbContext<DataContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                });
+
+            }
 
         }
 
@@ -63,35 +121,21 @@ namespace api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
 
-            app.UseCors("AllowAllOrigins");
+            app.UseCors("AllowSpecificOrigin");
+            
+            app.UseResponseCompression();
 
             // Perform the routing
             app.UseMvc();
 
             // Mock InitializeMockIfEmpty the DB
             MockDataInitialiser.InitializeMockIfEmpty(context);
+
         }
 
-        private static void buildCorsOptions(CorsOptions options)
-        {
-            options.AddPolicy("AllowAllOrigins",
-                builder =>
-                {
-                    builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader();
-                });
-
-            //options.AddPolicy("AllowSpecificOrigin",
-            //    builder =>
-            //    {
-            //        builder.WithOrigins("http://localhost:18080")
-            //               .WithMethods("GET", "POST")
-            //               .AllowAnyHeader();
-            //    });
-        }
     }
 
 }
