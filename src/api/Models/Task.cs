@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api.Models
 {
@@ -10,6 +11,7 @@ namespace api.Models
 
     public class Task
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
         public int TaskID { get; set; }
 
