@@ -16,13 +16,13 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Task> GetAll() 
+        public IEnumerable<Task> List() 
         {
             return resource.GetAll();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult Read(int id)
         {
             var res = resource.Find(id);
             if (res == null)
@@ -44,7 +44,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Task item)
+        public IActionResult Replace(int id, [FromBody] Task item)
         {
             if (item == null || item.TaskID != id)
             {
@@ -62,7 +62,7 @@ namespace api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update([FromBody] Task item, int id)
+        public IActionResult Update(int id, [FromBody] Task item)
         {
             if (item == null)
             {
