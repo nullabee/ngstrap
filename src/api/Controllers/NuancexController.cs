@@ -5,11 +5,11 @@ using api.Resources;
 
 namespace api.Controllers
 {
-    public class TaskxController : BaseApiController
+    public class NuancexController : BaseApiController
     {
         private IResource<Nuance> resource { get; set; }
 
-        public TaskxController(IResource<Nuance> resource)
+        public NuancexController(IResource<Nuance> resource)
         {
             this.resource = resource;
         }
