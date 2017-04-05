@@ -13,6 +13,6 @@ namespace api.Models
         [Required]
         public string PlatformName { get; set; }
         
-        public ICollection<Task> Tasks { get; set; }
+        public ICollection<Nuance> Tasks { get; set; }
     }
 }

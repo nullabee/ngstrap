@@ -5,17 +5,17 @@ using api.Resources;
 
 namespace api.Controllers
 {
-    public class TasksController : ApiController
+    public class TaskxController : BaseApiController
     {
-        private IResource<Task> resource { get; set; }
+        private IResource<Nuance> resource { get; set; }
 
-        public TasksController(IResource<Task> resource)
+        public TaskxController(IResource<Nuance> resource)
         {
             this.resource = resource;
         }
 
         [HttpGet]
-        public IEnumerable<Task> List() 
+        public IEnumerable<Nuance> List() 
         {
             return resource.GetAll();
         }
@@ -32,20 +32,20 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Task item)
+        public IActionResult Create([FromBody] Nuance item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
             resource.Add(item);
-            return CreatedAtRoute(new { id = item.TaskID }, item);
+            return CreatedAtRoute(new { id = item.NuanceID }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Replace(int id, [FromBody] Task item)
+        public IActionResult Replace(int id, [FromBody] Nuance item)
         {
-            if (item == null || item.TaskID != id)
+            if (item == null || item.NuanceID != id)
             {
                 return BadRequest();
             }
@@ -61,7 +61,7 @@ namespace api.Controllers
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update(int id, [FromBody] Task item)
+        public IActionResult Update(int id, [FromBody] Nuance item)
         {
             if (item == null)
             {
@@ -74,7 +74,7 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            item.TaskID = res.TaskID;
+            item.NuanceID = res.NuanceID;
 
             resource.Update(item);
             return new NoContentResult();

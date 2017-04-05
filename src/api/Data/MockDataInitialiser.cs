@@ -7,12 +7,12 @@ namespace api.Data
     //https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
     public static class MockDataInitialiser
     {
-        public static void InitializeMockData(WorkContext context)
+        public static void InitializeMockData(DataContext context)
         {
             context.Database.EnsureCreated();
             
             // Look for any tasks.
-            if (context.Tasks.Any())
+            if (context.Nuances.Any())
             {
                 return;   // DB has been seeded
             }
@@ -34,7 +34,7 @@ namespace api.Data
 
             // Add tasks 
             {
-                var tasks = new Task[]
+                var tasks = new Nuance[]
                 {
                     MockTaskFactory.Generate(1, 1000),
                     MockTaskFactory.Generate(2, 2000),
@@ -42,9 +42,9 @@ namespace api.Data
                     MockTaskFactory.Generate(4, 2000)
                 };
 
-                foreach (Task t in tasks)
+                foreach (Nuance t in tasks)
                 {
-                    context.Tasks.Add(t);
+                    context.Nuances.Add(t);
                 }
                 context.SaveChanges();
             }
@@ -53,11 +53,11 @@ namespace api.Data
 
         static class MockTaskFactory 
         {
-            internal static Task Generate(int taskID, int platformID)
+            internal static Nuance Generate(int taskID, int platformID)
             {
-                return new Task
+                return new Nuance
                 {
-                    TaskID = taskID,
+                    NuanceID = taskID,
                     Title = "Task " + taskID,
                     Description = "Descr " + taskID,
                     UserID = "javan",

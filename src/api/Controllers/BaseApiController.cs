@@ -3,7 +3,7 @@
 namespace api.Controllers
 {
     [Route("api/v1/[controller]")]
-    public abstract class ApiController : Controller {
+    public abstract class BaseApiController : Controller {
 
     }
 }

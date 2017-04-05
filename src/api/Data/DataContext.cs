@@ -3,18 +3,17 @@ using api.Models;
 
 namespace api.Data
 {
-    public class WorkContext : DbContext
+    public class DataContext : DbContext
     {
-        public WorkContext(DbContextOptions<WorkContext> options) : base(options)
-        {
-        }
+        public DataContext(DbContextOptions<DataContext> options) 
+            : base(options) { }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<Nuance> Nuances { get; set; }
         public DbSet<Platform> Platforms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Task>().ToTable("Tasks");
+            modelBuilder.Entity<Nuance>().ToTable("Nuances");
             modelBuilder.Entity<Platform>().ToTable("Platforms");
         }
     }

@@ -10,7 +10,7 @@
 //        [Route("Something")]
 //        public string Get()
 //        {
-//            return "GET: This";
+//            return "GET: This message";
 //        }
 
 //        [HttpPost]

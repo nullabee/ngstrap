@@ -9,11 +9,11 @@ namespace api.Models
         Normal, High
     }
 
-    public class Task
+    public class Nuance
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
-        public int TaskID { get; set; }
+        public int NuanceID { get; set; }
 
         [Required]
         public string Title { get; set; }

@@ -40,9 +40,9 @@ namespace api
         { 
             {
                 services.AddTransient<IResource<Platform>, PlatformResource>();
-                services.AddTransient<IResource<Task>, TaskResource>();
+                services.AddTransient<IResource<Nuance>, NuanceResource>();
 
-                services.AddDbContext<WorkContext>(options =>
+                services.AddDbContext<DataContext>(options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 });
@@ -114,7 +114,7 @@ namespace api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env,
-            ILoggerFactory loggerFactory, WorkContext context)
+            ILoggerFactory loggerFactory, DataContext context)
         {
             loggerFactory.AddConsole();
 

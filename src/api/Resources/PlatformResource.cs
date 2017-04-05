@@ -8,9 +8,9 @@ namespace api.Resources
 {
     public class PlatformResource : IResource<Platform>
     {
-        private readonly WorkContext context;
+        private readonly DataContext context;
 
-        public PlatformResource(WorkContext context)
+        public PlatformResource(DataContext context)
         {
             this.context = context;
         }
