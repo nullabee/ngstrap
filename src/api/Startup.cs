@@ -104,10 +104,10 @@ namespace api
 
                 // return JSON response in form of Camel Case so that we can sure consume the API in any client.
                 // Enable CamelCasePropertyNamesContractResolver in Configure Services.
-                services.Configure<MvcJsonOptions>(options =>
-                {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                });
+                //services.Configure<MvcJsonOptions>(options =>
+                //{
+                //    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                //});
 
             }
         }

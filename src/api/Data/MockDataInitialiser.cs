@@ -34,16 +34,10 @@ namespace api.Data
 
             // Add tasks 
             {
-                var nuances = new Nuance[]
+                Random rand = new Random();
+                for (int c = 0; c < 5; c++)
                 {
-                    MockTaskFactory.Generate(1, 1000),
-                    MockTaskFactory.Generate(2, 2000),
-                    MockTaskFactory.Generate(3, 1000),
-                    MockTaskFactory.Generate(4, 2000)
-                };
-
-                foreach (Nuance n in nuances)
-                {
+                    Nuance n = MockTaskFactory.Generate(c, rand.Next(1, 3) * 1000);
                     context.Nuances.Add(n);
                 }
                 context.SaveChanges();

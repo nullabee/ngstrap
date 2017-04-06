@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using api.Data;
 using api.Models;
-using api.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace api.Resources
 {
@@ -16,46 +16,51 @@ namespace api.Resources
             this.context = context;
         }
 
+        //public IEnumerable<Nuance> List()
+        //{
+        //    return context.Nuances.AsNoTracking().ToList();
+        //}
+
         public async Task<List<Nuance>> ListAsync()
         {
-            return await context.Nuances.ToListAsync();
+            return await context.Nuances.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Nuance> FindAsync(int key)
-        {
-            return await context.Nuances
-                .Where(r => r.NuanceID.Equals(key))
-                .SingleOrDefaultAsync();
-        }
+        //public async Task<Nuance> FindAsync(int key)
+        //{
+        //    return await context.Nuances
+        //        .Where(r => r.NuanceID.Equals(key))
+        //        .SingleOrDefaultAsync();
+        //}
 
-        public async Task<int> AddAsync(Nuance item)
-        {
-            await context.Nuances.AddAsync(item);
-            return await context.SaveChangesAsync();            
-        }
+        //public async Task<int> AddAsync(Nuance item)
+        //{
+        //    await context.Nuances.AddAsync(item);
+        //    return await context.SaveChangesAsync();            
+        //}
 
-        public async Task<int> RemoveAsync(int key)
-        {
-            var res = await FindAsync(key);
-            if (res != null)
-            {
-                context.Nuances.Remove(res);
-                return await context.SaveChangesAsync();
-            }
-            return await Task.FromResult(0);
-        }
+        //public async Task<int> RemoveAsync(int key)
+        //{
+        //    var res = await FindAsync(key);
+        //    if (res != null)
+        //    {
+        //        context.Nuances.Remove(res);
+        //        return await context.SaveChangesAsync();
+        //    }
+        //    return await Task.FromResult(0);
+        //}
 
-        public async Task<int> UpdateAsync(Nuance item)
-        {
-            var res = await FindAsync(item.NuanceID);
-            if (res != null)
-            {
-                res.Title = item.Title;
-                res.Description = item.Description;
-                res.UserID = item.UserID;
-                return await context.SaveChangesAsync();
-            }
-            return await Task.FromResult(0);
-        }
+        //public async Task<int> UpdateAsync(Nuance item)
+        //{
+        //    var res = await FindAsync(item.NuanceID);
+        //    if (res != null)
+        //    {
+        //        res.Title = item.Title;
+        //        res.Description = item.Description;
+        //        res.UserID = item.UserID;
+        //        return await context.SaveChangesAsync();
+        //    }
+        //    return await Task.FromResult(0);
+        //}
     }
 }
