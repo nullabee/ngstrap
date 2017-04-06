@@ -5,10 +5,10 @@ namespace api.Resources
 {
     public interface IResource<T>
     {
-        Task<List<T>> GetAll();
-        Task<T> Find(int key);
-        void Add(T item);
-        bool Remove(int key);
-        bool Update(T item);
+        Task<List<T>> ListAsync();
+        Task<T> FindAsync(int key);
+        Task<int> AddAsync(T item);
+        Task<int> RemoveAsync(int key);
+        Task<int> UpdateAsync(T item);
     }
 }

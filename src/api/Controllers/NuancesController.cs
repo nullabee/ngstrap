@@ -25,16 +25,16 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> List()
+        public async Task<JsonResult> ListAsync()
         {
-            var results = await resource.GetAll();
+            var results = await resource.ListAsync();
             return new JsonResult(results, jsonSS);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Read(int id)
+        public async Task<IActionResult> ReadAsync(int id)
         {
-            var res = resource.Find(id);
+            var res = await resource.FindAsync(id);
             if (res == null)
             {
                 return NotFound();
@@ -43,64 +43,66 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Task item)
+        public async Task<IActionResult> CreateAsync([FromBody] Nuance item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
-            resource.Add(item);
-            return CreatedAtRoute(new { id = item.TaskID }, item);
+            await resource.AddAsync(item);
+            return CreatedAtRoute(new { id = item.NuanceID }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Replace(int id, [FromBody] Task item)
+        public async Task<IActionResult> ReplaceAsync(int id, [FromBody] Nuance item)
         {
-            if (item == null || item.TaskID != id)
+            if (item == null || item.NuanceID != id)
             {
                 return BadRequest();
             }
 
-            var res = resource.Find(id);
+            var res = await resource.FindAsync(id);
             if (res == null)
             {
                 return NotFound();
             }
 
-            resource.Update(item);
+            await resource.UpdateAsync(item);
             return new NoContentResult();
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Update(int id, [FromBody] Task item)
+        public async Task<IActionResult> UpdateAsync(int id, [FromBody] Nuance item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
 
-            var res = resource.Find(id);
+            var res = await resource.FindAsync(id);
             if (res == null)
             {
                 return NotFound();
             }
 
-            item.TaskID = res.NuanceID;
+            item.NuanceID = res.NuanceID;
 
-            resource.Update(item);
+            await resource.UpdateAsync(item);
+
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var res = resource.Find(id);
+            var res = await resource.FindAsync(id);
             if (res == null)
             {
                 return NotFound();
             }
 
-            resource.Remove(id);
+            await resource.RemoveAsync(id);
+
             return new NoContentResult();
         }
     }

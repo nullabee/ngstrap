@@ -34,7 +34,7 @@ namespace api.Data
 
             // Add tasks 
             {
-                var tasks = new Nuance[]
+                var nuances = new Nuance[]
                 {
                     MockTaskFactory.Generate(1, 1000),
                     MockTaskFactory.Generate(2, 2000),
@@ -42,9 +42,9 @@ namespace api.Data
                     MockTaskFactory.Generate(4, 2000)
                 };
 
-                foreach (Nuance t in tasks)
+                foreach (Nuance n in nuances)
                 {
-                    context.Nuances.Add(t);
+                    context.Nuances.Add(n);
                 }
                 context.SaveChanges();
             }

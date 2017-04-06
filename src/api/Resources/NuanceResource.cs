@@ -16,50 +16,46 @@ namespace api.Resources
             this.context = context;
         }
 
-        public async Task<List<Nuance>> GetAll()
+        public async Task<List<Nuance>> ListAsync()
         {
             return await context.Nuances.ToListAsync();
         }
 
-        public Task<Nuance> Find(int key)
+        public async Task<Nuance> FindAsync(int key)
         {
-            return context.Nuances
+            return await context.Nuances
                 .Where(r => r.NuanceID.Equals(key))
                 .SingleOrDefaultAsync();
         }
 
-        public async Task Add(Nuance item)
+        public async Task<int> AddAsync(Nuance item)
         {
-            context.Nuances.Add(item);
-            context.SaveChanges();
-            return new Task();
+            await context.Nuances.AddAsync(item);
+            return await context.SaveChangesAsync();            
         }
 
-        public async Task<bool> Remove(int key)
+        public async Task<int> RemoveAsync(int key)
         {
-            var res = await Find(key);
+            var res = await FindAsync(key);
             if (res != null)
             {
                 context.Nuances.Remove(res);
-                context.SaveChanges();
-                return true;
+                return await context.SaveChangesAsync();
             }
-            return false;
+            return await Task.FromResult(0);
         }
 
-        public async Task<bool> Update(Nuance item)
+        public async Task<int> UpdateAsync(Nuance item)
         {
-            var res = await Find(item.NuanceID);
+            var res = await FindAsync(item.NuanceID);
             if (res != null)
             {
                 res.Title = item.Title;
                 res.Description = item.Description;
                 res.UserID = item.UserID;
-                context.SaveChanges();
-                return true;
+                return await context.SaveChangesAsync();
             }
-
-            return false;           
+            return await Task.FromResult(0);
         }
     }
 }

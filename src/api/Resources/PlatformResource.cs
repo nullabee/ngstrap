@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using api.Models;
 using api.Data;
@@ -15,47 +17,46 @@ namespace api.Resources
             this.context = context;
         }
 
-        public IEnumerable<Platform> GetAll()
+        public async Task<List<Platform>> ListAsync()
         {
-            return context.Platforms;
+            return await context.Platforms.ToListAsync();
         }
 
-        public Platform Find(int key)
+        public async Task<Platform> FindAsync(int key)
         {
-            return context.Platforms
+            return await context.Platforms
                 .Where(r => r.PlatformID.Equals(key))
-                .SingleOrDefault();
+                .SingleOrDefaultAsync();
         }
 
-        public void Add(Platform item)
+        public async Task<int> AddAsync(Platform item)
         {
-            context.Platforms.Add(item);
-            context.SaveChanges();
+            await context.Platforms.AddAsync(item);
+            return await context.SaveChangesAsync();
         }
 
-        public bool Remove(int key)
+        public async Task<int> RemoveAsync(int key)
         {
-            var res = Find(key);
+            var res = await FindAsync(key);
             if (res != null)
             {
                 context.Platforms.Remove(res);
-                context.SaveChanges();
-                return true;
+                return await context.SaveChangesAsync();
+                
             }
-            return false;
+            return await Task.FromResult(0);
         }
 
-        public bool Update(Platform item)
+        public async Task<int> UpdateAsync(Platform item)
         {
-            var res = Find(item.PlatformID);
+            var res = await FindAsync(item.PlatformID);
             if (res != null)
             {
                 res.PlatformName = item.PlatformName;
-                context.SaveChanges();
-                return true;
+                return await context.SaveChangesAsync();
             }
 
-            return false;
+            return await Task.FromResult(0);
         }
     }
 }
