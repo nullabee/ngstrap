@@ -12,6 +12,7 @@ docker build --rm -t build:image -f Dockerfile.build .
 # Create a web-container (webc) from the web:image
 docker create --name webc build:image
 docker cp webc:/dist ./dist
+chown -R jave:jave ./dist
 
 # Clean up
 docker stop webc
