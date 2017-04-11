@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
+using MySQL.Data.Entity.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -36,14 +36,14 @@ namespace api
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
             {
                 services.AddTransient<IResource<Platform>, PlatformResource>();
                 services.AddTransient<IResource<Nuance>, NuanceResource>();
 
                 services.AddDbContext<DataContext>(options =>
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                    options.UseMySQL(Configuration.GetConnectionString("DataSource:MySQLProvider"));
                 });
             }
 
@@ -96,7 +96,7 @@ namespace api
                     options.Level = CompressionLevel.Fastest;
                 });
             }
-            
+
             {
                 //services.AddRouting();
                 services.AddMvc();
@@ -124,27 +124,27 @@ namespace api
             }
 
             app.UseCors("AllowAllOrigins");
-            
+
             app.UseResponseCompression();
 
             // Perform the routing
-            //app.UseRouter(CreateRoutes(app).Build());            
+            //app.UseRouter(CreateRoutes(app).Build());
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "api/v1/{controller}/{action}/{id?}");
             });
-            
+
             // Mock InitializeMockData the DB
             MockDataInitialiser.InitializeMockData(context);
 
         }
-        
+
         RouteBuilder CreateRoutes(IApplicationBuilder app)
         {
             RouteHandler defaultHandler = new RouteHandler(context =>
-            {   
+            {
                 var routeValues = context.GetRouteData().Values;
                 return context.Response.WriteAsync(
                     $"Strapping Route values: {string.Join(", ", routeValues)}");
@@ -157,7 +157,7 @@ namespace api
                 "api/v1/{action:regex(^track|create|detonate$)}/{id:int}");
 
             routeBuilder.MapRoute("readme/{name}", context =>
-            {   
+            {
                 var name = context.GetRouteValue("name");
                 return context.Response.WriteAsync($"Hi, {name}!");
             });
