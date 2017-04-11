@@ -4,7 +4,7 @@
 rm -rf dist 
 
 # Create a build:image
-docker build --rm -t build:image .
+docker build --rm -t build:image -f Dockerfile.build .
 
 # As you cannot copy directly from the image back to the host
 # So, create a container from the image. Then copy the files back to the host.
