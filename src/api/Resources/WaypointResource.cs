@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace api.Resources
 {
-    public class NuanceResource : IResource<Nuance>
+    public class WaypointResource : IResource<Waypoint>
     {
         private readonly DataContext context;
 
-        public NuanceResource(DataContext context)
+        public WaypointResource(DataContext context)
         {
             this.context = context;
         }
 
-        public async Task<List<Nuance>> ListAsync()
+        public async Task<List<Waypoint>> ListAsync()
         {
-            return await context.Nuances.AsNoTracking().ToListAsync();
+            return await context.Waypoints.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Nuance> FindAsync(int key)
+        public async Task<Waypoint> FindAsync(int key)
         {
-            return await context.Nuances
-                .Where(r => r.NuanceID.Equals(key))
+            return await context.Waypoints
+                .Where(r => r.WaypointID.Equals(key))
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<int> AddAsync(Nuance item)
+        public async Task<int> AddAsync(Waypoint item)
         {
-            await context.Nuances.AddAsync(item);
+            await context.Waypoints.AddAsync(item);
             return await context.SaveChangesAsync();
         }
 
@@ -39,21 +39,22 @@ namespace api.Resources
             var res = await FindAsync(key);
             if (res != null)
             {
-                context.Nuances.Remove(res);
+                context.Waypoints.Remove(res);
                 return await context.SaveChangesAsync();
+
             }
             return await Task.FromResult(0);
         }
 
-        public async Task<int> UpdateAsync(Nuance item)
+        public async Task<int> UpdateAsync(Waypoint item)
         {
-            var res = await FindAsync(item.NuanceID);
+            var res = await FindAsync(item.WaypointID);
             if (res != null)
             {
                 res.Title = item.Title;
-                res.Description = item.Description;
                 return await context.SaveChangesAsync();
             }
+
             return await Task.FromResult(0);
         }
     }

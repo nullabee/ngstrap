@@ -38,7 +38,7 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             {
-                services.AddTransient<IResource<Platform>, PlatformResource>();
+                services.AddTransient<IResource<Waypoint>, WaypointResource>();
                 services.AddTransient<IResource<Nuance>, NuanceResource>();
 
                 services.AddDbContext<DataContext>(options =>
@@ -137,7 +137,7 @@ namespace api
             });
 
             // Mock InitializeMockData the DB
-            MockDataInitialiser.InitializeMockData(context);
+            //MockDataInitialiser.InitializeMockData(context);
 
         }
 

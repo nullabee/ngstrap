@@ -15,7 +15,7 @@ namespace api.Controllers
         //    ContractResolver = new JsonContractResolver()
         //};
 
-        // TODO: resources can be instantiated per request to 
+        // TODO: resources can be instantiated per request to
         // avoid persistent connections with DB (depends on setup)
         private IResource<Nuance> resource { get; set; }
 
@@ -23,12 +23,6 @@ namespace api.Controllers
         {
             this.resource = resource;
         }
-
-        //[HttpGet]
-        //public IEnumerable<Nuance> List()
-        //{
-        //    return resource.List();
-        //}
 
         [HttpGet]
         public async Task<JsonResult> ListAsync()

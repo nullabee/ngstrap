@@ -14,39 +14,43 @@ namespace api.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
-        //[JsonProperty("nuance_id")]
+        [JsonProperty("id")]
         public int NuanceID { get; set; }
 
         [Required]
-        //[JsonProperty("title")]
+        [JsonProperty("title")]
         public string Title { get; set; }
 
         [Required]
-        //[JsonProperty("descr")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
-        [Required]
-        //[JsonProperty("user_id")]
-        public string UserID { get; set; }
+        [JsonProperty("tptId")]
+        public string UserId { get; set; }
 
-        [Required]
-        //[JsonProperty("created_dt")]
+        [JsonProperty("createdDt")]
         public DateTime CreatedDT { get; set; }
 
-        [Required]
-        //[JsonProperty("due_dt")]
+        [JsonProperty("systId")]
+        public string SystId { get; set; }
+
+        [JsonProperty("dueDt")]
         public DateTime DueDT { get; set; }
 
-        [Required]
-        //[JsonProperty("priority")]
+        [JsonProperty("priority")]
         public Priority Priority { get; set; }
 
-        //[JsonProperty("platform")]
-        public Platform Platform { get; set; }
+        [JsonProperty("details")]
+        public string Details { get; set; }
 
-        [Required] // only for mock seeding
-        //[JsonProperty("platform_id")]
-        public int PlatformID { get; set; }
+        [JsonProperty("joSize")]
+        public int JoSize { get; set; }
+
+        [JsonProperty("joIndex")]
+        public int JoIndex { get; set; }
+
+        [JsonProperty("routeItems")]
+        public Waypoint[] Waypoints { get; set; }
 
     }
 
