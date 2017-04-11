@@ -14,7 +14,7 @@ namespace api
                 //.AddEnvironmentVariables(prefix: "ASPNETCORE_")
                 .AddJsonFile("hosting.json", optional: true, reloadOnChange: true)
                 .Build();
-            
+
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseConfiguration(config)
