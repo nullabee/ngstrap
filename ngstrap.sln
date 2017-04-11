@@ -6,6 +6,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0EFEFF1E-0727-467F-8E44-2E67399480DD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F24E27B9-4579-4458-96FC-4E84A9BD9A1D}"
+	ProjectSection(SolutionItems) = preProject
+		docker_build = docker_build
+		configs\docker\docker_run = configs\docker\docker_run
+		Dockerfile.build = Dockerfile.build
+		configs\docker\Dockerfile.runtime = configs\docker\Dockerfile.runtime
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "src\api\api.csproj", "{3C46BE8C-8A7D-440D-AA0A-0CF0690781C0}"
 EndProject
