@@ -4,4 +4,4 @@
 docker rmi web:runtime
 
 docker build -t web:runtime -f Dockerfile.runtime .
-docker run -it --rm -p 7777:9000 web:runtime
+docker run -it -d -p 8000:9000 web:runtime
