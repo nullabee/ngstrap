@@ -10,9 +10,9 @@ namespace api
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                //.AddCommandLine(args)
-                //.AddEnvironmentVariables(prefix: "ASPNETCORE_")
-                .AddJsonFile("hosting.json", optional: true, reloadOnChange: true)
+                .AddCommandLine(args)
+                .AddEnvironmentVariables(prefix: "ASPNETCORE_")
+                //.AddJsonFile("hosting.json", optional: true, reloadOnChange: true)
                 .Build();
 
             var host = new WebHostBuilder()
@@ -21,7 +21,7 @@ namespace api
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseUrls($"{config["server.urls"]}")
+                //.UseUrls($"{config["server.urls"]}")
                 .Build();
 
             host.Run();
