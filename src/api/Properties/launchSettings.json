@@ -16,11 +16,9 @@
     },
     "Web (Api)": {
       "commandName": "Project",
-      "commandLineArgs": "--server.urls http://localhost",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost"
+      }
     }
   }
 }

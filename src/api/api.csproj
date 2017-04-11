@@ -10,6 +10,8 @@
     <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+
   <ItemGroup>
     <Compile Remove="node_modules" />
     <Content Update="appsettings.json;web.config;wwwroot">
