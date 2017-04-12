@@ -126,6 +126,63 @@ namespace api.Data
                 Priority = Priority.High
             };
 
+            nuance.Waypoints = new List<Waypoint>();
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "ON, Canada",
+                ArriveDT = null,
+                DepartDT = ParseDT("2017-03-28T22:03"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.AtStart,
+                Order = 0,
+                BlockChain = 1,
+
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "NY, USA",
+                ArriveDT = ParseDT("2017-03-29T12:57"),
+                DepartDT = ParseDT("2017-03-31T15:40"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.Middle,
+                Order = 1,
+                BlockChain = 1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "ZN, Africa",
+                ArriveDT = ParseDT("2017-04-01T19:33"),
+                DepartDT = ParseDT("2017-04-02T16:44"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.Middle,
+                Order = 2,
+                BlockChain = -1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "BOM, India",
+                ArriveDT = ParseDT("2017-04-04T18:57"),
+                DepartDT = ParseDT("2017-04-04T22:00"),
+                Status = WaypointStatus.Current,
+                Path = WaypointPath.Middle,
+                Order = 3,
+                BlockChain = 1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "SG, Singapore",
+                ArriveDT = ParseDT("2017-04-05T19:00"),
+                DepartDT = null,
+                Status = WaypointStatus.Next,
+                Path = WaypointPath.AtEnd,
+                Order = 4,
+                BlockChain = 0
+            });
+
             return nuance;
         }
 
@@ -141,6 +198,86 @@ namespace api.Data
                 DueDT = ParseDT("2017-03-30T19:00"),
                 Priority = Priority.Normal
             };
+
+            nuance.Waypoints = new List<Waypoint>();
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "ON, Canada",
+                ArriveDT = null,
+                DepartDT = ParseDT("2017-03-28T22:03"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.AtStart,
+                Order = 0,
+                BlockChain = 1,
+
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "NY, USA",
+                ArriveDT = ParseDT("2017-03-29T12:57"),
+                DepartDT = ParseDT("2017-03-31T15:40"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.Middle,
+                Order = 1,
+                BlockChain = 1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "ZN, Africa",
+                ArriveDT = ParseDT("2017-04-01T19:33"),
+                DepartDT = ParseDT("2017-04-02T16:44"),
+                Status = WaypointStatus.Previous,
+                Path = WaypointPath.Middle,
+                Order = 2,
+                BlockChain = -1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "BOM, India",
+                ArriveDT = ParseDT("2017-04-04T18:57"),
+                DepartDT = ParseDT("2017-04-04T22:00"),
+                Status = WaypointStatus.Current,
+                Path = WaypointPath.Middle,
+                Order = 3,
+                BlockChain = 1
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "KL, Malaysia",
+                ArriveDT = ParseDT("2017-04-05T14:30"),
+                DepartDT = ParseDT("2017-04-05T15:00"),
+                Status = WaypointStatus.Next,
+                Path = WaypointPath.Middle,
+                Order = 4,
+                BlockChain = 0
+            });
+
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "IN, Indonesia",
+                ArriveDT = ParseDT("2017-04-07T11:30"),
+                DepartDT = ParseDT("2017-04-08T12:00"),
+                Status = WaypointStatus.Next,
+                Path = WaypointPath.Middle,
+                Order = 5,
+                BlockChain = 0
+            });
+
+            nuance.Waypoints.Add(new Waypoint
+            {
+                Title = "NY, USA",
+                ArriveDT = ParseDT("2017-04-09T19:00"),
+                DepartDT = null,
+                Status = WaypointStatus.Next,
+                Path = WaypointPath.AtEnd,
+                Order = 6,
+                BlockChain = 0
+            });
 
             return nuance;
         }

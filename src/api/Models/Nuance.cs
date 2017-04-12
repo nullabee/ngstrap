@@ -62,7 +62,7 @@ namespace api.Models
                 int c = 0;
                 foreach (Waypoint wp in Waypoints)
                 {
-                    c += wp.Status <= 0 ? 1 : 0;
+                    c += wp.Status < 0 ? 1 : 0;
                 }
 
                 return c;
