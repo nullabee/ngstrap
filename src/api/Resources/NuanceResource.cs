@@ -21,6 +21,16 @@ namespace api.Resources
             return await context.Nuances.AsNoTracking()
                 .Include(n => n.Waypoints)
                 .ToListAsync();
+
+            //IEnumerable<Nuance> nuances = await context.Nuances.AsNoTracking()
+            //    .Include(n => n.Waypoints)
+            //    .ToListAsync();
+
+            //foreach (Nuance nuance in nuances)
+            //{
+            //    nuance.Waypoints = nuance.Waypoints.OrderBy(w => w.Order);
+            //}
+            //return nuances.ToList();
         }
 
         public async Task<Nuance> FindAsync(int key)

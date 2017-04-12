@@ -21,10 +21,10 @@ namespace api.Data
         public async Task<int> WipeDatabase()
         {
             Database.ExecuteSqlCommand(@"
-                SET FOREIGN_KEY_CHECKS = 0; 
-                TRUNCATE TABLE Nuances; 
+                SET FOREIGN_KEY_CHECKS = 0;
+                TRUNCATE TABLE Nuances;
                 TRUNCATE TABLE Waypoints;
-                SET FOREIGN_KEY_CHECKS = 1; 
+                SET FOREIGN_KEY_CHECKS = 1;
             ");
             return await Task.FromResult(0);
         }
