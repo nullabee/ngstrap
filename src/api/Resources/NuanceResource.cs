@@ -18,7 +18,9 @@ namespace api.Resources
 
         public async Task<List<Nuance>> ListAsync()
         {
-            return await context.Nuances.AsNoTracking().ToListAsync();
+            return await context.Nuances.AsNoTracking()
+                .Include(n => n.Waypoints)
+                .ToListAsync();
         }
 
         public async Task<Nuance> FindAsync(int key)
@@ -31,6 +33,12 @@ namespace api.Resources
         public async Task<int> AddAsync(Nuance item)
         {
             await context.Nuances.AddAsync(item);
+            return await context.SaveChangesAsync();
+        }
+
+        public async Task<int> AddRangeAsync(Nuance[] items)
+        {
+            await context.Nuances.AddRangeAsync(items);
             return await context.SaveChangesAsync();
         }
 

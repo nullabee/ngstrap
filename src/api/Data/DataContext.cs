@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using api.Models;
+using System.Threading.Tasks;
 
 namespace api.Data
 {
@@ -15,6 +16,17 @@ namespace api.Data
         {
             modelBuilder.Entity<Nuance>().ToTable("Nuances");
             modelBuilder.Entity<Waypoint>().ToTable("Waypoints");
+        }
+
+        public async Task<int> WipeDatabase()
+        {
+            Database.ExecuteSqlCommand(@"
+                SET FOREIGN_KEY_CHECKS = 0; 
+                TRUNCATE TABLE Nuances; 
+                TRUNCATE TABLE Waypoints;
+                SET FOREIGN_KEY_CHECKS = 1; 
+            ");
+            return await Task.FromResult(0);
         }
     }
 }

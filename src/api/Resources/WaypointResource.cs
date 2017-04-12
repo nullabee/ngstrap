@@ -34,6 +34,12 @@ namespace api.Resources
             return await context.SaveChangesAsync();
         }
 
+        public async Task<int> AddRangeAsync(Waypoint[] items)
+        {
+            await context.Waypoints.AddRangeAsync(items);
+            return await context.SaveChangesAsync();
+        }
+
         public async Task<int> RemoveAsync(int key)
         {
             var res = await FindAsync(key);

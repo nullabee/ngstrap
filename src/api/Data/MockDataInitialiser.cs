@@ -4,20 +4,20 @@
 
 //namespace api.Data
 //{
-//    //https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
+//    https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro
 //    public static class MockDataInitialiser
 //    {
 //        public static void InitializeMockData(DataContext context)
 //        {
 //            context.Database.EnsureCreated();
 
-//            // Look for any tasks.
+//             Look for any tasks.
 //            if (context.Nuances.Any())
 //            {
 //                return;   // DB has been seeded
 //            }
 
-//            // Add platforms
+//             Add platforms
 //            {
 //                var platforms = new Waypoint[]
 //                {
@@ -32,7 +32,7 @@
 //                context.SaveChanges();
 //            }
 
-//            // Add tasks
+//             Add tasks
 //            {
 //                Random rand = new Random();
 //                for (int c = 0; c < 5; c++)

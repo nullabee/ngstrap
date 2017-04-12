@@ -138,6 +138,7 @@ namespace api
 
             // Mock InitializeMockData the DB
             //MockDataInitialiser.InitializeMockData(context);
+            context.Database.EnsureCreated();
 
         }
 
