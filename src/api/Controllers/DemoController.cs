@@ -30,5 +30,12 @@ namespace api.Controllers
             return new OkResult();
         }
 
+        [HttpGet]
+        [Route("add-shipment")]
+        public async Task<ActionResult> AddShipment()
+        {
+            var results = await resource.AddAsync(MockData.GenerateShipment());
+            return new OkResult();
+        }
     }
 }

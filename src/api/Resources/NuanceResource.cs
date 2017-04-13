@@ -19,6 +19,7 @@ namespace api.Resources
         public async Task<List<Nuance>> ListAsync()
         {
             return await context.Nuances.AsNoTracking()
+                .OrderByDescending(n => n.NuanceID)
                 .Include(n => n.Waypoints)
                 .ToListAsync();
 
