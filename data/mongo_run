@@ -1,0 +1,34 @@
+#!/bin/bash
+
+host=(`hostname -I`)
+host=${host[0]}
+
+port=27017
+VMHOST_IP=$host:$port
+
+xport=28017
+xVMHOST_IP=$host:$xport
+#VMHOST_IP=192.168.136.128:$port
+
+DOCKER_IMAGE=tutum/mongodb
+
+docker run -d \
+ --volume ~/docker/mongodata:/data/db \
+ --env MONGODB_PASS=rakaboon88 \
+ --publish $VMHOST_IP:$port \
+ --publish $xVMHOST_IP:$xport \
+ --name mongodb \
+ $DOCKER_IMAGE
+# tutum/mongodb 
+# mongo:3.2
+
+
+docker inspect mongodb | grep IPAddr
+
+echo "....................."
+echo "defuser: admin"
+echo "defpass: rakaboon88"
+echo "defdb  : N/A"
+echo "ip: $VMHOST_IP"
+echo "xip: $xVMHOST_IP"
+echo "....................."

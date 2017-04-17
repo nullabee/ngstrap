@@ -1,0 +1,26 @@
+#!/bin/bash
+
+host=(`hostname -I`)
+host=${host[0]}
+
+port=5432
+VMHOST_IP=$host:$port
+#VMHOST_IP=192.168.136.128:$port
+
+DOCKER_IMAGE=postgres:9.6
+
+docker run -d \
+ --volume ~/docker/pgsqldata:/var/lib/postgresql/data \
+ --env POSTGRES_PASSWORD=rakaboon88 \
+ --publish $VMHOST_IP:$port \
+ --name pgsqldb \
+ $DOCKER_IMAGE 
+
+docker inspect pgsqldb | grep IPAddr
+
+echo "....................."
+echo "defuser: postgres"
+echo "defpass: rakaboon88"
+echo "defdb  : postgres"
+echo "ip: $VMHOST_IP"
+echo "....................."

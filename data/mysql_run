@@ -1,0 +1,28 @@
+#!/bin/bash
+
+docker stop mysql:5.7
+docker rm mysql:5.7
+
+host=(`hostname -I`)
+host=${host[0]}
+port=3306
+VMHOST_IP=$host:$port
+#VMHOST_IP=192.168.136.128:3306
+
+DOCKER_IMAGE=mysql:5.7
+
+docker run -d \
+ --volume ~/docker/mysqldata:/var/lib/mysql \
+ --env MYSQL_ROOT_PASSWORD=rakaboon88 \
+ --publish $VMHOST_IP:$port \
+ --name mysqldb \
+ $DOCKER_IMAGE 
+
+docker inspect mysqldb | grep IPAddr
+
+echo "....................."
+echo "defuser: root"
+echo "defpass: rakaboon88"
+echo "defdb  : N/A"
+echo "ip: $VMHOST_IP"
+echo "....................."
