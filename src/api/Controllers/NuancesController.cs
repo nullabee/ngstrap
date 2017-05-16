@@ -17,9 +17,9 @@ namespace api.Controllers
 
         // TODO: resources can be instantiated per request to
         // avoid persistent connections with DB (depends on setup)
-        private IResource<Nuance> resource { get; set; }
+        private NuanceResource resource { get; set; }
 
-        public NuancesController(IResource<Nuance> resource)
+        public NuancesController(NuanceResource resource)
         {
             this.resource = resource;
         }
