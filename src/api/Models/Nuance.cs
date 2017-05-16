@@ -71,7 +71,7 @@ namespace api.Models
         }
 
         [JsonProperty("waypoints")]
-        public IList<Waypoint> Waypoints { get; set; }
+        public ICollection<Waypoint> Waypoints { get; set; }
 
     }
 

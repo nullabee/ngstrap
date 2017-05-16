@@ -53,23 +53,23 @@ namespace api.Controllers
 
         Nuance mockUpdate(Nuance nuance)
         {
-            for (int c = 0; c < nuance.Waypoints.Count; c++)
-            {
-                Waypoint wp = nuance.Waypoints[c];
+            //for (int c = 0; c < nuance.Waypoints.Count; c++)
+            //{
+            //    Waypoint wp = nuance.Waypoints[c];
 
-                if (wp.Status == 0)
-                {
-                    wp.Status = Models.Definitions.WaypointStatus.Previous;
-                    if (c < nuance.Waypoints.Count - 1)
-                    {
-                        Waypoint next = nuance.Waypoints[c + 1];
-                        next.Status = Models.Definitions.WaypointStatus.Current;
-                        next.BlockChain = 1;
-                    }
+            //    if (wp.Status == 0)
+            //    {
+            //        wp.Status = Models.Definitions.WaypointStatus.Previous;
+            //        if (c < nuance.Waypoints.Count - 1)
+            //        {
+            //            Waypoint next = nuance.Waypoints[c + 1];
+            //            next.Status = Models.Definitions.WaypointStatus.Current;
+            //            next.BlockChain = 1;
+            //        }
 
-                    return nuance;
-                }
-            }
+            //        return nuance;
+            //    }
+            //}
             return nuance;
         }
     }
