@@ -38,8 +38,8 @@ namespace api
         public void ConfigureServices(IServiceCollection services)
         {
             {
-                services.AddTransient<IResource<Waypoint>, WaypointResource>();
-                services.AddTransient<IResource<Nuance>, NuanceResource>();
+                services.AddTransient<WaypointResource, WaypointResource>();
+                services.AddTransient<NuanceResource, NuanceResource>();
 
                 services.AddDbContext<DataContext>(options =>
                 {

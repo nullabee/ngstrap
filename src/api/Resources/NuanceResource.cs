@@ -34,6 +34,19 @@ namespace api.Resources
             //return nuances.ToList();
         }
 
+        public async Task<Nuance> LatestAsync()
+        {
+            Nuance nuance = await context.Nuances
+                .Include(n => n.Waypoints)
+                .OrderByDescending(n => n.NuanceID)
+                .Take(1)
+                .SingleOrDefaultAsync();
+
+            nuance.Waypoints = nuance.Waypoints.OrderBy(w => w.Order).ToList();
+
+            return nuance;
+        }
+
         public async Task<Nuance> FindAsync(int key)
         {
             return await context.Nuances
@@ -75,5 +88,15 @@ namespace api.Resources
             }
             return await Task.FromResult(0);
         }
+
+        public async Task<int> QuickUpdateAsync(Nuance item)
+        {
+            if (item != null)
+            {
+                return await context.SaveChangesAsync();
+            }
+            return await Task.FromResult(0);
+        }
+
     }
 }

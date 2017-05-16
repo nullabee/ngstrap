@@ -35,5 +35,8 @@ namespace api.Models
         [JsonProperty("blockchain")]
         public int BlockChain { get; set; }
 
+        [JsonIgnore]
+        [ForeignKey("NuanceID")]
+        public Nuance Nuance { get; set; }
     }
 }
