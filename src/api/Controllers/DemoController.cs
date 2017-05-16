@@ -57,7 +57,7 @@ namespace api.Controllers
             {
                 Waypoint wp = nuance.Waypoints[c];
 
-                if (wp.Status == 0)
+                if (wp.Status == 0 && c < nuance.Waypoints.Count - 1)
                 {
                     wp.Status = Models.Definitions.WaypointStatus.Previous;
                     if (c < nuance.Waypoints.Count - 1)
